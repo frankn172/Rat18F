@@ -1,74 +1,73 @@
-﻿#pragma once
-#include<iostream>
+﻿#include<iostream>
 #include<string>
 using namespace std;
 
-bool l(char input) {
-	if ((input >= 'a'&&input <= 'z') || (input >= 'A'&&input <= 'Z')) {
-		return true;
-	}
-	else return false;
+bool l(char input)
+{
+
+	return ((toupper(input) >= 'A') && (toupper(input) <= 'Z'));
 }
 
-bool d(char input) {
-	if (input >= '0' && input <= '9') {
-		return true;
-	}
-	else return false;
+bool d(char input)
+{
+
+	return ((input >= 0) && (input <= 9));
 }
 
-bool dot(char input) {
-	if (input == '.') {
-		return true;
-	}
-	else return false;
+bool dot(char input)
+{
+	return (input == '.');
 }
 
-class Identifier{
+class Identifier
+{
 private:
 	string Iden;
 public:
-	friend class Keywards;
+	friend class Keywords;
 	friend class Operators;
 	friend class Seprators;
-
-
-
 };
 
-class Keywards {
-	bool IsKeyword(string input) {
-		string keywards[15] = {"function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false",""};
-		for (int i = 0; i < 15; i++) {
-			if (input == keywards[i]) {
+class Keywords
+{
+	bool IsKeyword(string input)
+	{
+		string keywords[15] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false","" };
+		for (int i = 0; i < 15; i++)
+		{
+			if (input.compare(keywords[i]) == 0)
 				return true;
-			}
-			return false;
 		}
+		return false;
 	}
 };
 
-class Operators {
-	bool IsOperator(string input) {
-		string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<"};
-		for (int i = 0; i < 11; i++) {
-			if (input == operators[i]) {
+class Operators
+{
+	bool IsOperator(string input)
+	{
+		string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<" };
+		for (int i = 0; i < 11; i++)
+		{
+			if (input.compare(operators[i]) == 0)
 				return true;
-			}
-			return false;
 		}
+		return false;
 	}
 };
 
-class Separators {
-	bool IsSeparator(string input) {
+class Separators
+{
+	bool IsSeparator(string input)
+	{
 		string separators[9] = { "<",">",":","$$",",",";","(",")","|" };
-		for (int i = 0; i < 9; i++) {
-			if (input == separators[i]) {
+		for (int i = 0; i < 9; i++)
+		{
+			if (input.compare(separators[i]) == 0)
 				return true;
-			}
-			return false;
 		}
+		return false;
 	}
 };
 
@@ -79,8 +78,3 @@ class Integer {
 class Real {
 
 };
-
-string lexer()
-{
-
-}
