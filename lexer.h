@@ -50,3 +50,19 @@ bool isReal(string input)
 	string after = input.substr(input.find(delimiter) + 1, input.size() + 1);
 	return ((isInteger(before)) && (isInteger(after)));
 }
+
+string lexer(string input)
+{
+	if (isKeyword(input))
+		return ("keyword\t\t" + input);
+	else if (isOperator(input))
+		return ("operator\t" + input);
+	else if (isSeparator(input))
+		return ("separator\t" + input);
+	else if (isInteger(input))
+		return ("integer\t\t" + input);
+	else if (isReal(input))
+		return ("real\t" + input);
+	else
+		return ("identifier\t" + input);
+}
