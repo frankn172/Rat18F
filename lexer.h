@@ -62,7 +62,7 @@ string lexer(string input)
 	else if (isInteger(input))
 		return ("integer\t\t" + input);
 	else if (isReal(input))
-		return ("real\t" + input);
+		return ("real\t\t" + input);
 	else
 		return ("identifier\t" + input);
 }
