@@ -14,9 +14,9 @@ int main()
 	while (true)
 	{
 		f >> temp;
-		v.push_back(temp);
 		if (f.fail())
 			break;
+		v.push_back(temp);
 		++i;
 	}
 

@@ -2,15 +2,17 @@
 #include<string>
 using namespace std;
 
-bool l(char input)
-{
-	return ((toupper(input) >= 'A') && (toupper(input) <= 'Z'));
-}
+//isalpha()
+//bool l(char input)
+//{
+//	return ((toupper(input) >= 'A') && (toupper(input) <= 'Z'));
+//}
 
-bool d(char input)
-{
-	return ((input >= 0) && (input <= 9));
-}
+//isdigit()
+//bool d(char input)
+//{
+//	return ((input >= 0) && (input <= 9));
+//}
 
 bool dot(char input)
 {
@@ -82,6 +84,7 @@ class Integer
 	}
 };
 
-class Real {
+class Real
+{
 
 };
