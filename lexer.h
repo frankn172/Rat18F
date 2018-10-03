@@ -2,89 +2,51 @@
 #include<string>
 using namespace std;
 
-//isalpha()
-//bool l(char input)
-//{
-//	return ((toupper(input) >= 'A') && (toupper(input) <= 'Z'));
-//}
-
-//isdigit()
-//bool d(char input)
-//{
-//	return ((input >= 0) && (input <= 9));
-//}
-
-bool dot(char input)
+bool isKeyword(string input)
 {
-	return (input == '.');
+	string keywords[14] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false" };
+	for (int i = 0; i < 14; i++)
+	{
+		if (input.compare(keywords[i]) == 0)
+			return true;
+	}
+	return false;
 }
 
-class Identifier
+bool isOperator(string input)
 {
-private:
-	string Iden;
-public:
-	friend class Keywords;
-	friend class Operators;
-	friend class Seprators;
-	friend class Integer;
-	friend class Real;
-};
-
-class Keywords
-{
-	bool isKeyword(string input)
+	string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<" };
+	for (int i = 0; i < 11; i++)
 	{
-		string keywords[14] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false"};
-		for (int i = 0; i < 14; i++)
-		{
-			if (input.compare(keywords[i]) == 0)
-				return true;
-		}
-		return false;
+		if (input.compare(operators[i]) == 0)
+			return true;
 	}
-};
+	return false;
+}
 
-class Operators
+bool isSeparator(string input)
 {
-	bool isOperator(string input)
+	string separators[9] = { "<",">",":","$$",",",";","(",")","|" };
+	for (int i = 0; i < 9; i++)
 	{
-		string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<" };
-		for (int i = 0; i < 11; i++)
-		{
-			if (input.compare(operators[i]) == 0)
-				return true;
-		}
-		return false;
+		if (input.compare(separators[i]) == 0)
+			return true;
 	}
-};
+	return false;
+}
 
-class Separators
+bool isInteger(string input)
 {
-	bool isSeparator(string input)
-	{
-		string separators[9] = { "<",">",":","$$",",",";","(",")","|" };
-		for (int i = 0; i < 9; i++)
-		{
-			if (input.compare(separators[i]) == 0)
-				return true;
-		}
-		return false;
-	}
-};
+	string::const_iterator it = input.begin();
+	while ((it != input.end()) && (isdigit(*it)))
+		++it;
+	return (!input.empty() && it == input.end());
+}
 
-class Integer
+bool isReal(string input)
 {
-	bool isInteger(string input)
-	{
-		string::const_iterator it = input.begin();
-		while ((it != input.end()) && (isdigit(*it)))
-			++it;
-		return (!input.empty() && it == input.end());
-	}
-};
-
-class Real
-{
-
-};
+	string delimiter = ".";
+	string before = input.substr(0, input.find(delimiter));
+	string after = input.substr(input.find(delimiter) + 1, input.size() + 1);
+	return ((isInteger(before)) && (isInteger(after)));
+}
