@@ -27,11 +27,13 @@ public:
 	friend class Keywords;
 	friend class Operators;
 	friend class Seprators;
+	friend class Integer;
+	friend class Real;
 };
 
 class Keywords
 {
-	bool IsKeyword(string input)
+	bool isKeyword(string input)
 	{
 		string keywords[15] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false","" };
 		for (int i = 0; i < 15; i++)
@@ -45,7 +47,7 @@ class Keywords
 
 class Operators
 {
-	bool IsOperator(string input)
+	bool isOperator(string input)
 	{
 		string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<" };
 		for (int i = 0; i < 11; i++)
@@ -59,7 +61,7 @@ class Operators
 
 class Separators
 {
-	bool IsSeparator(string input)
+	bool isSeparator(string input)
 	{
 		string separators[9] = { "<",">",":","$$",",",";","(",")","|" };
 		for (int i = 0; i < 9; i++)
@@ -71,8 +73,15 @@ class Separators
 	}
 };
 
-class Integer {
-
+class Integer
+{
+	bool isInteger(string input)
+	{
+		string::const_iterator it = input.begin();
+		while ((it != input.end()) && (isdigit(*it)))
+			++it;
+		return (!input.empty() && it == input.end());
+	}
 };
 
 class Real {
