@@ -39,8 +39,10 @@ bool isInteger(string input)
 {
 	string::const_iterator it = input.begin();
 	while ((it != input.end()) && (isdigit(*it)))
+	{
 		++it;
-	return (!input.empty() && it == input.end());
+	}
+	return ((!input.empty()) && (it == input.end()));
 }
 
 bool isReal(string input)
