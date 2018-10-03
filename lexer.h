@@ -4,13 +4,11 @@ using namespace std;
 
 bool l(char input)
 {
-
 	return ((toupper(input) >= 'A') && (toupper(input) <= 'Z'));
 }
 
 bool d(char input)
 {
-
 	return ((input >= 0) && (input <= 9));
 }
 
