@@ -35,8 +35,8 @@ class Keywords
 {
 	bool isKeyword(string input)
 	{
-		string keywords[15] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false","" };
-		for (int i = 0; i < 15; i++)
+		string keywords[14] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false"};
+		for (int i = 0; i < 14; i++)
 		{
 			if (input.compare(keywords[i]) == 0)
 				return true;
