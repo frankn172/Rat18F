@@ -48,10 +48,24 @@ bool isInteger(string input)
 
 bool isReal(string input)
 {
-	string delimiter = ".";
-	string before = input.substr(0, input.find(delimiter));
-	string after = input.substr(input.find(delimiter) + 1, input.size() + 1);
-	return ((isInteger(before)) && (isInteger(after)));
+bool isReal(string input)
+{
+	int dot = input.find('.');
+	if (dot != -1) {
+		for (int i = 0; i < dot; i++) {
+			if (!isdigit(input[i])) {
+				return false;
+			}
+		}
+		for (int j = dot; j < input.length(); j++) {
+			if (!isdigit(input[j])) {
+				return false;
+			}
+		}
+		return true;
+	}
+	return false;
+}
 }
 
 bool isIdentifier(string input) {
