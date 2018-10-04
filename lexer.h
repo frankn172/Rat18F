@@ -1,4 +1,5 @@
-﻿#include<iostream>
+#pragma once
+#include<iostream>
 #include<string>
 using namespace std;
 
@@ -53,18 +54,57 @@ bool isReal(string input)
 	return ((isInteger(before)) && (isInteger(after)));
 }
 
+bool isIdentifier(string input) {
+	int len = input.length();
+	if (len == 1) {
+		return true;
+	}
+	for (int i = 0; i < len; i++) {
+		if (!isdigit(input[i]) || !isalpha(input[i])) {
+			return false;
+		}
+	}
+	if (!isalpha(input[len - 1])) {
+		return false;
+	}
+	return true;
+}
+
+bool isComment(string input) {
+
+}
+
 string lexer(string input)
 {
-	if (isKeyword(input))
-		return ("keyword\t\t" + input);
-	else if (isOperator(input))
-		return ("operator\t" + input);
-	else if (isSeparator(input))
-		return ("separator\t" + input);
-	else if (isInteger(input))
-		return ("integer\t\t" + input);
-	else if (isReal(input))
-		return ("real\t\t" + input);
-	else
-		return ("identifier\t" + input);
+	string::const_iterator fir = input.begin();
+	if (isComment(input)) {
+
+		}
+	if (isdigit(*fir)) {
+		if (isInteger(input)) {
+			return ("integer\t\t" + input);
+		}
+		if (isReal(input)) {
+			return ("real\t\t" + input);
+		}
+	}
+
+	else if (isalpha(*fir)) {
+		if (isKeyword(input)) {
+			return ("keyword\t\t" + input);
+		}
+		if (isIdentifier(input)) {
+			return ("identifier\t" + input);
+		}
+	}
+
+	else {
+		if (isSeparator(input)) {
+			return ("separator\t" + input);
+		}
+		if (isOperator(input)) {
+			return ("operator\t" + input);
+		}
+	}
+
 }
