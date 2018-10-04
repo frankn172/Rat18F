@@ -83,6 +83,7 @@ void isComment(string input) {
 string lexer(string input)
 {
 	string::const_iterator fir = input.begin();
+	isComment(input);
 	if (CM) {
 		if (isdigit(*fir)) {
 			if (isInteger(input)) {
