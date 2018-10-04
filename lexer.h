@@ -70,41 +70,45 @@ bool isIdentifier(string input) {
 	return true;
 }
 
-bool isComment(string input) {
-
+bool CM = true;
+void isComment(string input) {
+	if (input == "[*") {
+		CM = false;
+	}
+	if (input == "*]") {
+		CM = true;
+	}
 }
 
 string lexer(string input)
 {
 	string::const_iterator fir = input.begin();
-	if (isComment(input)) {
+	if (CM) {
+		if (isdigit(*fir)) {
+			if (isInteger(input)) {
+				return ("integer\t\t" + input);
+			}
+			if (isReal(input)) {
+				return ("real\t\t" + input);
+			}
+		}
 
+		else if (isalpha(*fir)) {
+			if (isKeyword(input)) {
+				return ("keyword\t\t" + input);
+			}
+			if (isIdentifier(input)) {
+				return ("identifier\t" + input);
+			}
 		}
-	if (isdigit(*fir)) {
-		if (isInteger(input)) {
-			return ("integer\t\t" + input);
-		}
-		if (isReal(input)) {
-			return ("real\t\t" + input);
+
+		else {
+			if (isSeparator(input)) {
+				return ("separator\t" + input);
+			}
+			if (isOperator(input)) {
+				return ("operator\t" + input);
+			}
 		}
 	}
-
-	else if (isalpha(*fir)) {
-		if (isKeyword(input)) {
-			return ("keyword\t\t" + input);
-		}
-		if (isIdentifier(input)) {
-			return ("identifier\t" + input);
-		}
-	}
-
-	else {
-		if (isSeparator(input)) {
-			return ("separator\t" + input);
-		}
-		if (isOperator(input)) {
-			return ("operator\t" + input);
-		}
-	}
-
 }
