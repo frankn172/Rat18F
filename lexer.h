@@ -48,8 +48,6 @@ bool isInteger(string input)
 
 bool isReal(string input)
 {
-bool isReal(string input)
-{
 	int dot = input.find('.');
 	if (dot != -1) {
 		for (int i = 0; i < dot; i++) {
@@ -65,7 +63,6 @@ bool isReal(string input)
 		return true;
 	}
 	return false;
-}
 }
 
 bool isIdentifier(string input) {
