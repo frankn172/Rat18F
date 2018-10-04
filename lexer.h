@@ -26,8 +26,8 @@ bool isOperator(string input)
 
 bool isSeparator(string input)
 {
-	string separators[9] = { "<",">",":","$$",",",";","(",")","|" };
-	for (int i = 0; i < 9; i++)
+	string separators[7] = { ":","$$",",",";","(",")","|" };
+	for (int i = 0; i < 7; i++)
 	{
 		if (input.compare(separators[i]) == 0)
 			return true;
