@@ -81,21 +81,10 @@ bool isIdentifier(string input) {
 	return true;
 }
 
-bool CM = true;
-void isComment(string input) {
-	if (input == "[*") {
-		CM = false;
-	}
-	if (input == "*]") {
-		CM = true;
-	}
-}
 
 string lexer(string input)
 {
 	string::const_iterator fir = input.begin();
-	isComment(input);
-	if (CM) {
 		if (isdigit(*fir)) {
 			if (isInteger(input)) {
 				return ("integer\t\t" + input);
@@ -122,5 +111,4 @@ string lexer(string input)
 				return ("operator\t" + input);
 			}
 		}
-	}
 }
