@@ -27,10 +27,12 @@ int main()
 		++i;
 	}
 
-	/*for (i = 0; i < v.size(); ++i)
+	deleteComment(v);
+	for (int i = 0; i < v.size(); ++i)
 	{
 		g << v.at(i) << endl;
-	}*/
+	}
+	
 
 	f.close();
 	g.close();
