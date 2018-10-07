@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<vector>
 using namespace std;
 
 bool isKeyword(string input)
@@ -50,13 +51,17 @@ bool isReal(string input)
 {
 	int dot = input.find('.');
 	if (dot != -1) {
-		for (int i = 0; i < dot; i++) {
-			if (!isdigit(input[i])) {
+		for (int i = 0; i < dot; i++)
+		{
+			if (!isdigit(input[i]))
+			{
 				return false;
 			}
 		}
-		for (int j = dot; j < input.length(); j++) {
-			if (!isdigit(input[j])) {
+		for (int j = dot; j < input.length(); j++)
+		{
+			if (!isdigit(input[j]))
+			{
 				return false;
 			}
 		}
@@ -65,50 +70,88 @@ bool isReal(string input)
 	return false;
 }
 
-bool isIdentifier(string input) {
+bool isIdentifier(string input)
+{
 	int len = input.length();
-	if (len == 1) {
+	if (len == 1)
+	{
 		return true;
 	}
-	for (int i = 0; i < len; i++) {
-		if (!isdigit(input[i]) || !isalpha(input[i])) {
+	for (int i = 0; i < len; i++)
+	{
+		if (!isdigit(input[i]) || !isalpha(input[i]))
+		{
 			return false;
 		}
 	}
-	if (!isalpha(input[len - 1])) {
+	if (!isalpha(input[len - 1]))
+	{
 		return false;
 	}
 	return true;
 }
 
+void deleteComment(vector<string> str)
+{
+	int counter, start_point, end_point;
+	while (true)
+	{
+		counter = 0;
+		for (int i = 0; i < str.size(); ++i)
+		{
+			if (str.at(i).compare("[*") == 0)
+			{
+				start_point = i;
+				counter++;
+			}
+			if (str.at(i).compare("*]") == 0)
+			{
+				end_point = i;
+				counter++;
+			}
+		}
+		str.erase(str.begin() + start_point, str.begin() + end_point);
+		if (counter == 0)
+			break;
+	}
+}
 
 string lexer(string input)
 {
 	string::const_iterator fir = input.begin();
-		if (isdigit(*fir)) {
-			if (isInteger(input)) {
-				return ("integer\t\t" + input);
-			}
-			if (isReal(input)) {
-				return ("real\t\t" + input);
-			}
+	if (isdigit(*fir))
+	{
+		if (isInteger(input))
+		{
+			return ("integer\t\t" + input);
 		}
+		if (isReal(input))
+		{
+			return ("real\t\t" + input);
+		}
+	}
 
-		else if (isalpha(*fir)) {
-			if (isKeyword(input)) {
-				return ("keyword\t\t" + input);
-			}
-			if (isIdentifier(input)) {
-				return ("identifier\t" + input);
-			}
+	else if (isalpha(*fir))
+	{
+		if (isKeyword(input))
+		{
+			return ("keyword\t\t" + input);
 		}
+		if (isIdentifier(input))
+		{
+			return ("identifier\t" + input);
+		}
+	}
 
-		else {
-			if (isSeparator(input)) {
-				return ("separator\t" + input);
-			}
-			if (isOperator(input)) {
-				return ("operator\t" + input);
-			}
+	else
+	{
+		if (isSeparator(input))
+		{
+			return ("separator\t" + input);
 		}
+		if (isOperator(input))
+		{
+			return ("operator\t" + input);
+		}
+	}
 }

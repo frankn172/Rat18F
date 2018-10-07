@@ -1,5 +1,4 @@
 #include<fstream>
-#include<vector>
 #include "lexer.h"
 
 int main()
@@ -28,31 +27,10 @@ int main()
 		++i;
 	}
 
-	while (true)
-	{
-		counter = 0;
-		for (i = 0; i < v.size(); ++i)
-		{
-			if (v.at(i).compare("[*") == 0)
-			{
-				start_point = i;
-				counter++;
-			}
-			if (v.at(i).compare("*]") == 0)
-			{
-				end_point = i;
-				counter++;
-			}
-		}
-		v.erase(v.begin() + start_point, v.begin() + end_point);
-		if (counter == 0)
-			break;
-	}
-
-	for (i = 0; i < v.size(); ++i)
+	/*for (i = 0; i < v.size(); ++i)
 	{
 		g << v.at(i) << endl;
-	}
+	}*/
 
 	f.close();
 	g.close();
