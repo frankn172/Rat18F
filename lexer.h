@@ -29,7 +29,7 @@ bool isOperator(string input)
 bool isSeparator(string input)
 {
 	string separators[9] = { ":","$$",",",";","(",")","|","{","}" };
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		if (input.compare(separators[i]) == 0)
 			return true;
@@ -50,44 +50,37 @@ bool isInteger(string input)
 bool isReal(string input)
 {
 	int dot = input.find('.');
-	if (dot != -1) {
+	if (dot != -1)
+	{
 		for (int i = 0; i < dot; i++)
 		{
 			if (!isdigit(input[i]))
-			{
 				return false;
-			}
 		}
 		for (int j = dot; j < input.length(); j++)
 		{
 			if (!isdigit(input[j]))
-			{
 				return false;
-			}
 		}
 		return true;
 	}
-	return false;
+	else return false;
 }
 
 bool isIdentifier(string input)
 {
 	int len = input.length();
 	if (len == 1)
-	{
 		return true;
-	}
+
 	for (int i = 0; i < len; i++)
 	{
 		if (!isdigit(input[i]) || !isalpha(input[i]))
-		{
 			return false;
-		}
 	}
+
 	if (!isalpha(input[len - 1]))
-	{
 		return false;
-	}
 	return true;
 }
 
@@ -107,6 +100,7 @@ void deleteComment(vector<string> &str)
 			if (str.at(i).compare("*]") == 0)
 			{
 				end_point = i;
+				counter++;
 			}
 		}
 		if (counter != 0)
