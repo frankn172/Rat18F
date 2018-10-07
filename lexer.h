@@ -94,14 +94,25 @@ bool isIdentifier(string input)
 void deleteComment(vector<string> &str)
 {
 	int counter, start_point, end_point;
-	for (int i = 0; i < str.size(); ++i)
+	while (true)
 	{
-		if (str.at(i).compare("[*") == 0)
-			start_point = i;
-		if (str.at(i).compare("*]") == 0)
-			end_point = i;
+		counter = 0;
+		for (int i = 0; i < str.size(); ++i)
+		{
+			if (str.at(i).compare("[*") == 0)
+			{
+				start_point = i;
+				counter++;
+			}	
+			if (str.at(i).compare("*]") == 0)
+			{
+				end_point = i;
+			}
+		}
+		if (counter != 0)
+			str.erase(str.begin() + start_point, str.begin() + end_point + 1);
+		else break;
 	}
-	str.erase(str.begin() + start_point, str.begin() + end_point + 1);
 }
 
 string lexer(string input)

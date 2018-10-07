@@ -33,7 +33,6 @@ int main()
 		g << v.at(i) << endl;
 	}
 	
-
 	f.close();
 	g.close();
 	cout << "Done... Please refer to " << output_file << endl;
