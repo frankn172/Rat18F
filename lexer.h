@@ -116,36 +116,27 @@ string lexer(string input)
 	if (isdigit(*fir))
 	{
 		if (isInteger(input))
-		{
 			return ("integer\t\t" + input);
-		}
-		if (isReal(input))
-		{
+		else if (isReal(input))
 			return ("real\t\t" + input);
-		}
+		else return input;
 	}
 
 	else if (isalpha(*fir))
 	{
 		if (isKeyword(input))
-		{
 			return ("keyword\t\t" + input);
-		}
-		if (isIdentifier(input))
-		{
+		else if (isIdentifier(input))
 			return ("identifier\t" + input);
-		}
+		else return input;
 	}
 
 	else
 	{
 		if (isSeparator(input))
-		{
 			return ("separator\t" + input);
-		}
-		if (isOperator(input))
-		{
+		else if (isOperator(input))
 			return ("operator\t" + input);
-		}
+		else return input;
 	}
 }
