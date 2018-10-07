@@ -30,7 +30,7 @@ int main()
 	deleteComment(v);
 	for (int i = 0; i < v.size(); ++i)
 	{
-		g << v.at(i) << endl;
+		g << lexer(v.at(i)) << endl;
 	}
 	
 	f.close();

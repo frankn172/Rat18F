@@ -71,17 +71,18 @@ bool isIdentifier(string input)
 {
 	int len = input.length();
 	if (len == 1)
-		return true;
-
-	for (int i = 0; i < len; i++)
-	{
-		if (!isdigit(input[i]) || !isalpha(input[i]))
-			return false;
-	}
-
-	if (!isalpha(input[len - 1]))
+		return (isalpha(input[0]));
+	else if ((!isalpha(input[0])) || (!isalpha(input[len - 1])))
 		return false;
-	return true;
+	else
+	{
+		for (int i = 1; i < len -1; i++)
+		{
+			if (!isalnum(input[i]))
+				return false;
+		}
+		return true;
+	}
 }
 
 void deleteComment(vector<string> &str)
