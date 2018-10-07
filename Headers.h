@@ -4,18 +4,10 @@
 #include<vector>
 using namespace std;
 
-vector<string> v;
-
-struct node {
-	int num;
-	node* next;
-};
-
-
 bool isKeyword(string input)
 {
 	string keywords[14] = { "function","int","boolean","real","if","ifend","else","return","put","get","while","whileend","true","false" };
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < 14; ++i)
 	{
 		if (input.compare(keywords[i]) == 0)
 			return true;
@@ -26,7 +18,7 @@ bool isKeyword(string input)
 bool isOperator(string input)
 {
 	string operators[11] = { "=","+","-","*","/","==","^=",">","<","=>","=<" };
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 11; ++i)
 	{
 		if (input.compare(operators[i]) == 0)
 			return true;
@@ -37,7 +29,7 @@ bool isOperator(string input)
 bool isSeparator(string input)
 {
 	string separators[9] = { ":","$$",",",";","(",")","|","{","}" };
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; ++i)
 	{
 		if (input.compare(separators[i]) == 0)
 			return true;
@@ -60,12 +52,12 @@ bool isReal(string input)
 	int dot = input.find('.');
 	if (dot != -1)
 	{
-		for (int i = 0; i < dot; i++)
+		for (int i = 0; i < dot; ++i)
 		{
 			if (!isdigit(input[i]))
 				return false;
 		}
-		for (int j = dot+1; j < input.length(); j++)
+		for (int j = dot + 1; j < input.length(); ++j)
 		{
 			if (!isdigit(input[j]))
 				return false;
@@ -84,7 +76,7 @@ bool isIdentifier(string input)
 		return false;
 	else
 	{
-		for (int i = 1; i < len - 1; i++)
+		for (int i = 1; i < len - 1; ++i)
 		{
 			if (!isalnum(input[i]))
 				return false;
@@ -118,100 +110,96 @@ void deleteComment(vector<string> &str)
 	}
 }
 
-string sep(string input) {
+string sep(string input)
+{
 	int last = 0;
-	string tem="";
+	string tem = "";
 	string after;
-	bool swi=true;
+	bool swi = true;
 
-	for (int i = 0; i < input.length(); i++) {
-		if (!isalnum(input[i])) {
-			string t = input.substr(i,1);
-			if (isOperator(t) ) {
-				if (i == 0) {
+	for (int i = 0; i < input.length(); ++i)
+	{
+		if (!isalnum(input[i]))
+		{
+			string t = input.substr(i, 1);
+			if (isOperator(t))
+			{
+				if (i == 0)
+				{
 					tem = tem + "operator\t" + t + "\n";
 					last += 1;
 				}
-				else if (swi) {
+				else if (swi)
+				{
 					after = input.substr(last, i - last);
-					if (isIdentifier(after)) {
+					if (isIdentifier(after))
 						tem = tem + "identifier\t" + after + "\n";
-					}
-					else if (isKeyword(after)){
-						tem = tem +"keyword\t\t" + after + "\n";
-					}
-					else if (isInteger(after)) {
-						tem = tem + "integer\t\t" + after + "\n";
-					}
-					else if (isReal(after)) {
-						tem = tem + "real\t" + after + "\n";
-						}
-					else {
-						tem = tem + after + "\n";
-					}
-					tem = tem + "operator\t" + t + "\n";
-				}
-				else {
-					after = input.substr(last, i - last);
-					tem = tem + after + "\n";
-					tem = tem + "operator\t" + t + "\n";
-				}
-				last = i+1;
-			}
-			else if (isSeparator(t)) {
-				if (i == 0) {
-					tem = tem + "separator\t" + t + "\n";
-					last += 1;
-				}
-				else if (swi) {
-					after = input.substr(last, i - last);
-					if (isIdentifier(after)) {
-						tem = tem + "identifier\t" + after + "\n";
-					}
-					else if (isKeyword(after)) {
+					else if (isKeyword(after))
 						tem = tem + "keyword\t\t" + after + "\n";
-					}
-					else if (isInteger(after)) {
+					else if (isInteger(after))
 						tem = tem + "integer\t\t" + after + "\n";
-					}
-					else if (isReal(after)) {
+					else if (isReal(after))
 						tem = tem + "real\t" + after + "\n";
-					}
-					else {
-						tem = tem + after + "\n";
-					}
-					tem = tem + "separator\t" + t + "\n";
+					else
+						tem = tem + after;
+					tem = tem + "operator\t" + t;
 				}
-				else {
+				else
+				{
 					after = input.substr(last, i - last);
-					tem = tem + after + "\n";
+					tem = tem + after;
+					tem = tem + "operator\t" + t;
+				}
+				last = i + 1;
+			}
+			else if (isSeparator(t))
+			{
+				if (i == 0)
+				{
+					tem = tem + "separator\t" + t + "\n";
+					last += 1;
+				}
+				else if (swi)
+				{
+					after = input.substr(last, i - last);
+					if (isIdentifier(after))
+						tem = tem + "identifier\t" + after + "\n";
+					else if (isKeyword(after))
+						tem = tem + "keyword\t\t" + after + "\n";
+					else if (isInteger(after))
+						tem = tem + "integer\t\t" + after + "\n";
+					else if (isReal(after))
+						tem = tem + "real\t" + after + "\n";
+					else
+						tem = tem + after;
 					tem = tem + "separator\t" + t + "\n";
 				}
-				last = i+1;
+				else
+				{
+					after = input.substr(last, i - last);
+					tem = tem + after;
+					tem = tem + "separator\t" + t + "\n";
+				}
+				last = i + 1;
 			}
-			else {
+			else
 				swi = false;
-			}
 		}
 	}
-	if (last == 1) {
-			after = input.substr(last, input.length() - last);
-			if (isIdentifier(after)) {
-				tem = tem + "identifier\t" + after + "\n";
-			}
-			else if (isKeyword(after)) {
-				tem = tem + "keyword\t\t" + after + "\n";
-			}
-			else if (isInteger(after)) {
-				tem = tem + "integer\t\t" + after + "\n";
-			}
-			else if (isReal(after)) {
-				tem = tem + "real\t" + after + "\n";
-			}
-			else {
-				tem = tem + after + "\n";
-			}
-		}
+	if (last == 1)
+	{
+		after = input.substr(last, input.length() - last);
+		if (isIdentifier(after))
+			tem = tem + "identifier\t" + after;
+		else if (isKeyword(after))
+			tem = tem + "keyword\t\t" + after;
+		else if (isInteger(after))
+			tem = tem + "integer\t\t" + after;
+		else if (isReal(after))
+			tem = tem + "real\t" + after;
+		else
+			tem = tem + after;
+	}
 	return tem;
 }
 
@@ -226,7 +214,6 @@ string lexer(string input)
 			return ("real\t\t" + input);
 		else return sep(input);
 	}
-
 	else if (isalpha(*fir))
 	{
 		if (isKeyword(input))
@@ -235,7 +222,6 @@ string lexer(string input)
 			return ("identifier\t" + input);
 		else return sep(input);
 	}
-
 	else
 	{
 		if (isSeparator(input))

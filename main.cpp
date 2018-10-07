@@ -1,5 +1,5 @@
 #include<fstream>
-#include "lexer.h"
+#include "Headers.h"
 
 int main()
 {
@@ -32,10 +32,10 @@ int main()
 	{
 		g << lexer(v.at(i)) << endl;
 	}
-	
+
 	f.close();
 	g.close();
-	cout << "Done... Please refer to " << output_file << endl;
+	cout << endl << "Done... Please refer to " << output_file << endl;
 	system("pause");
 	return 0;
 }
