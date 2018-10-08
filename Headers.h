@@ -89,6 +89,7 @@ bool isIdentifier(string input)
 	}
 }
 
+//delete comments inclosed in "[*" and "*]" from a string vector
 void deleteComment(vector<string> &str)
 {
 	int counter, start_point, end_point;
@@ -113,6 +114,7 @@ void deleteComment(vector<string> &str)
 		else break;
 	}
 }
+
 //check if it is two connected OP/SEP
 bool isTwo(string input)
 {
@@ -125,6 +127,7 @@ bool isTwo(string input)
 	}
 	return false;
 }
+
 //separate string
 string sep(string input)
 {
@@ -335,5 +338,4 @@ string lexer(string input)
 			return ("operator\t" + input);
 		else return sep(input);
 	}
-}
 }

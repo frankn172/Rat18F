@@ -89,6 +89,7 @@ bool isIdentifier(string input)
 	}
 }
 
+//delete comments inclosed in "[*" and "*]" from a string vector
 void deleteComment(vector<string> &str)
 {
 	int counter, start_point, end_point;
@@ -114,6 +115,7 @@ void deleteComment(vector<string> &str)
 	}
 }
 
+//check if it is two connected OP/SEP
 bool isTwo(string input)
 {
 	string temp = input;
@@ -126,29 +128,38 @@ bool isTwo(string input)
 	return false;
 }
 
+//separate string
 string sep(string input)
 {
+	//point to last symbol
 	int last = 0;
 	string tem = "";
+	//string after last symbol
 	string after;
+	//switch to check if the string before the symbol is invaliad
 	bool swi = true;
+	//conter to avoid checking a connected symbol twice
 	int counter = 0;
 	for (int i = 0; i < input.length(); ++i)
 	{
+		//the content is not alnum
 		if (!isalnum(input[i]) && input[i] != '.')
 		{
 			if (counter == 0)
 			{
 				string te = input.substr(i, 2);
+				//two byte token
 				if (isTwo(te))
 				{
 					if (isOperator(te))
 					{
+						//the token is first of the string
 						if (i == 0)
 						{
 							tem = tem + "operator\t" + te + "\n";
 							last += 2;
 						}
+						//string before the symbol may not invaliad
 						else if (swi)
 						{
 							after = input.substr(last, i - last);
@@ -164,6 +175,7 @@ string sep(string input)
 								tem = tem + after;
 							tem = tem + "operator\t" + te + "\n";
 						}
+						//string before the symbol is invaliad
 						else
 						{
 							after = input.substr(last, i - last);
@@ -172,6 +184,7 @@ string sep(string input)
 						}
 						last = i + 2;
 					}
+					//same as OP
 					else if (isSeparator(te))
 					{
 						if (i == 0)
@@ -204,6 +217,7 @@ string sep(string input)
 					}
 					counter = 2;
 				}
+				//single byte symbol, basically same as above
 				else
 				{
 					string t = input.substr(i, 1);
@@ -275,6 +289,7 @@ string sep(string input)
 				counter--;
 		}
 	}
+	//check string after last symbol
 	if (last != input.length())
 	{
 		after = input.substr(last, input.length() - last);
@@ -289,6 +304,7 @@ string sep(string input)
 		else
 			tem = tem + "\t\t" + after + "\n";
 	}
+	//delete last \n to avoid blanks 
 	if (tem != "")
 		tem = tem.substr(0, tem.length() - 1);
 	return tem;
@@ -297,6 +313,7 @@ string sep(string input)
 string lexer(string input)
 {
 	string::const_iterator fir = input.begin();
+	//go to special case if not match common case
 	if (isdigit(*fir))
 	{
 		if (isInteger(input))
