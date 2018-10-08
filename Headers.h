@@ -268,7 +268,7 @@ string sep(string input)
 			}
 		}
 	}
-	if (last != input.length()-1)
+	if (last != input.length())
 	{
 		after = input.substr(last, input.length() - last);
 		if (isIdentifier(after))
