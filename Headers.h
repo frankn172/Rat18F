@@ -293,10 +293,10 @@ string sep(string input)
 	if (last != input.length())
 	{
 		after = input.substr(last, input.length() - last);
-		if (isIdentifier(after))
-			tem = tem + "identifier\t" + after + "\n";
-		else if (isKeyword(after))
+		if (isKeyword(after))
 			tem = tem + "keyword\t\t" + after + "\n";
+		else if (isIdentifier(after))
+			tem = tem + "identifier\t" + after + "\n";
 		else if (isInteger(after))
 			tem = tem + "integer\t\t" + after + "\n";
 		else if (isReal(after))
