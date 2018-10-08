@@ -5,5 +5,4 @@ c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\
 c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(38): warning C4018: '<': signed/unsigned mismatch
 c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'start_point': unreferenced local variable
 c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'end_point': unreferenced local variable
-  LINK : C:\Users\livel\OneDrive - Cal State Fullerton\2018 Fall\CPSC 323\Project\Rat18F\Debug\Rat18F.exe not found or not built by the last incremental link; performing full link
   Rat18F.vcxproj -> C:\Users\livel\OneDrive - Cal State Fullerton\2018 Fall\CPSC 323\Project\Rat18F\Debug\Rat18F.exe

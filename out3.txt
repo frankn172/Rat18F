@@ -1,21 +1,15 @@
 Output:
 token		lexeme
-identifier	deleteComment
-separator	(
-identifier	v
-separator	)
-separator	;
 identifier	for
 separator	(
-identifier	int
+keyword		int
 identifier	i
 operator	=
 integer		0
 separator	;
 identifier	i
 operator	<
-v.sizeseparator	(
-separator	)
+identifier	size
 separator	;
 operator	+
 operator	+
@@ -27,9 +21,7 @@ operator	<
 operator	<
 identifier	lexer
 separator	(
-v.atseparator	(
-identifier	i
-separator	)
+identifier	str
 separator	)
 operator	<
 operator	<
