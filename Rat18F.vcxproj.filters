@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lexer.h">
+    <ClInclude Include="Headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,52 +3,43 @@ token		lexeme
 keyword		function
 identifier	convert1x
 separator	(
-identifier	fahr
+identifier	fah
 separator	:
 identifier	int
 separator	)
-
 separator	{
 keyword		return
 integer		5
 operator	*
 separator	(
-identifier	fahr
+identifier	fah
 operator	-
 integer		32
 separator	)
-
 operator	/
 integer		9
 separator	;
-
 separator	}
 separator	$$
 keyword		int
 identifier	low
 separator	,
-
 identifier	high
 separator	,
-
 identifier	step
 separator	;
-
 keyword		get
 separator	(
 identifier	low
 separator	,
-
 identifier	high
 separator	,
-
 identifier	step
 separator	)
 separator	;
-
 keyword		while
 separator	(
-identifier	low
+identifier	lo
 operator	<
 identifier	high
 separator	)
@@ -58,23 +49,20 @@ separator	(
 identifier	low
 separator	)
 separator	;
-
 keyword		put
 separator	(
-identifier	convert1x
+identifier	convert1
 separator	(
 identifier	low
 separator	)
 separator	)
 separator	;
-
 identifier	low
 operator	=
 identifier	low
 operator	+
 identifier	step
 separator	;
-
 separator	}
 keyword		whileend
 separator	$$

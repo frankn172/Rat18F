@@ -1,3 +1,7 @@
+//CPSC 323
+//Frank Ngo & Yifei Feng
+//Assignment 1
+
 #include<fstream>
 #include "Headers.h"
 

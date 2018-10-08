@@ -1,3 +1,7 @@
+//CPSC 323
+//Frank Ngo & Yifei Feng
+//Assignment 1
+
 #pragma once
 #include<iostream>
 #include<string>
@@ -119,7 +123,7 @@ string sep(string input)
 
 	for (int i = 0; i < input.length(); ++i)
 	{
-		if (!isalnum(input[i])&&input[i] != '.')
+		if (!isalnum(input[i]) && input[i] != '.')
 		{
 			string t = input.substr(i, 1);
 			if (isOperator(t))
@@ -200,9 +204,8 @@ string sep(string input)
 		else
 			tem = tem + after;
 	}
-	if (tem != "") {
+	if (tem != "")
 		tem = tem.substr(0, tem.length() - 1);
-	}
 	return tem;
 }
 

@@ -1,6 +1,8 @@
 ﻿  main.cpp
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\lexer.h(58): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(34): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(52): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\lexer.h(126): warning C4715: 'lexer': not all control paths return a value
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(64): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(98): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(124): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(35): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'start_point': unreferenced local variable
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'end_point': unreferenced local variable
   Rat18F.vcxproj -> C:\Users\livel\OneDrive - Cal State Fullerton\2018 Fall\CPSC 323\Project\Rat18F\Debug\Rat18F.exe
