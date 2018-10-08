@@ -119,7 +119,7 @@ string sep(string input)
 
 	for (int i = 0; i < input.length(); ++i)
 	{
-		if (!isalnum(input[i]))
+		if (!isalnum(input[i])&&input[i] != '.')
 		{
 			string t = input.substr(i, 1);
 			if (isOperator(t))
@@ -199,6 +199,9 @@ string sep(string input)
 			tem = tem + "real\t" + after;
 		else
 			tem = tem + after;
+	}
+	if (tem != "") {
+		tem = tem.substr(0, tem.length() - 1);
 	}
 	return tem;
 }
