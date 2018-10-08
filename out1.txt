@@ -1,3 +1,14 @@
 Output:
 token		lexeme
-		finished!!!
+identifier	test
+integer		1
+integer		9
+operator	*
+integer		5
+operator	=
+integer		45
+integer		45
+operator	/
+integer		2
+operator	=
+real		22.5
