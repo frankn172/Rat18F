@@ -1,7 +1,3 @@
-//CPSC 323
-//Frank Ngo & Yifei Feng
-//Assignment 1
-
 #pragma once
 #include<iostream>
 #include<string>
@@ -114,98 +110,181 @@ void deleteComment(vector<string> &str)
 	}
 }
 
+bool istwo(string input) {
+	string temp = input;
+	string twocase[5] = {"==","^=","=<","=>","$$"};
+	for (int i = 0; i < 5; i++) {
+		if (temp == twocase[i]) {
+			return true;
+		}
+		else return false;
+	}
+}
+
 string sep(string input)
 {
 	int last = 0;
 	string tem = "";
 	string after;
 	bool swi = true;
-
+	int counter=0;
 	for (int i = 0; i < input.length(); ++i)
 	{
 		if (!isalnum(input[i]) && input[i] != '.')
 		{
-			string t = input.substr(i, 1);
-			if (isOperator(t))
-			{
-				if (i == 0)
-				{
-					tem = tem + "operator\t" + t + "\n";
-					last += 1;
+			if (counter == 0) {
+				string te = input.substr(i, 2);
+				if(istwo(te)){
+					if (isOperator(te))
+					{
+						if (i == 0)
+						{
+							tem = tem + "operator\t" + te + "\n";
+							last += 2;
+						}
+						else if (swi)
+						{
+							after = input.substr(last, i - last);
+							if (isIdentifier(after))
+								tem = tem + "identifier\t" + after + "\n";
+							else if (isKeyword(after))
+								tem = tem + "keyword\t\t" + after + "\n";
+							else if (isInteger(after))
+								tem = tem + "integer\t\t" + after + "\n";
+							else if (isReal(after))
+								tem = tem + "real\t\t" + after + "\n";
+							else
+								tem = tem + after;
+							tem = tem + "operator\t" + te+ "\n";
+						}
+						else
+						{
+							after = input.substr(last, i - last);
+							tem = tem + "\t\t" +after + "\n";
+							tem = tem + "operator\t" + te + "\n";
+						}
+						last = i + 2;
+					}
+					else if (isSeparator(te))
+					{
+						if (i == 0)
+						{
+							tem = tem + "separator\t" + te + "\n";
+							last += 1;
+						}
+						else if (swi)
+						{
+							after = input.substr(last, i - last);
+							if (isIdentifier(after))
+								tem = tem + "identifier\t" + after + "\n";
+							else if (isKeyword(after))
+								tem = tem + "keyword\t\t" + after + "\n";
+							else if (isInteger(after))
+								tem = tem + "integer\t\t" + after + "\n";
+							else if (isReal(after))
+								tem = tem + "real\t\t" + after + "\n";
+							else
+								tem = tem + after;
+							tem = tem + "separator\t" + te + "\n";
+						}
+						else
+						{
+							after = input.substr(last, i - last);
+							tem = tem + "\t\t" + after + "\n";
+							tem = tem + "separator\t" + te + "\n";
+						}
+						last = i + 2;
+					}
+					counter = 2;
 				}
-				else if (swi)
+				else {
+				string t = input.substr(i, 1);
+				if (isOperator(t))
 				{
-					after = input.substr(last, i - last);
-					if (isIdentifier(after))
-						tem = tem + "identifier\t" + after + "\n";
-					else if (isKeyword(after))
-						tem = tem + "keyword\t\t" + after + "\n";
-					else if (isInteger(after))
-						tem = tem + "integer\t\t" + after + "\n";
-					else if (isReal(after))
-						tem = tem + "real\t" + after + "\n";
+					if (i == 0)
+					{
+						tem = tem + "operator\t" + t + "\n";
+						last += 1;
+					}
+					else if (swi)
+					{
+						after = input.substr(last, i - last);
+						if (isIdentifier(after))
+							tem = tem + "identifier\t" + after + "\n";
+						else if (isKeyword(after))
+							tem = tem + "keyword\t\t" + after + "\n";
+						else if (isInteger(after))
+							tem = tem + "integer\t\t" + after + "\n";
+						else if (isReal(after))
+							tem = tem + "real\t\t" + after + "\n";
+						else
+							tem = tem + after;
+						tem = tem + "operator\t" + t + "\n";
+					}
 					else
-						tem = tem + after;
-					tem = tem + "operator\t" + t;
+					{
+						after = input.substr(last, i - last);
+						tem = tem + "\t\t" + after + "\n";
+						tem = tem + "operator\t" + t + "\n";
+					}
+					last = i + 1;
+				}
+				else if (isSeparator(t))
+				{
+					if (i == 0)
+					{
+						tem = tem + "separator\t" + t + "\n";
+						last += 1;
+					}
+					else if (swi)
+					{
+						after = input.substr(last, i - last);
+						if (isIdentifier(after))
+							tem = tem + "identifier\t" + after + "\n";
+						else if (isKeyword(after))
+							tem = tem + "keyword\t\t" + after + "\n";
+						else if (isInteger(after))
+							tem = tem + "integer\t\t" + after + "\n";
+						else if (isReal(after))
+							tem = tem + "real\t\t" + after + "\n";
+						else
+							tem = tem + after;
+						tem = tem + "separator\t" + t + "\n";
+					}
+					else
+					{
+						after = input.substr(last, i - last);
+						tem = tem + "\t\t" + after + "\n";
+						tem = tem + "separator\t" + t + "\n";
+					}
+					last = i + 1;
 				}
 				else
-				{
-					after = input.substr(last, i - last);
-					tem = tem + after;
-					tem = tem + "operator\t" + t;
-				}
-				last = i + 1;
+					swi = false;
 			}
-			else if (isSeparator(t))
-			{
-				if (i == 0)
-				{
-					tem = tem + "separator\t" + t + "\n";
-					last += 1;
-				}
-				else if (swi)
-				{
-					after = input.substr(last, i - last);
-					if (isIdentifier(after))
-						tem = tem + "identifier\t" + after + "\n";
-					else if (isKeyword(after))
-						tem = tem + "keyword\t\t" + after + "\n";
-					else if (isInteger(after))
-						tem = tem + "integer\t\t" + after + "\n";
-					else if (isReal(after))
-						tem = tem + "real\t" + after + "\n";
-					else
-						tem = tem + after;
-					tem = tem + "separator\t" + t + "\n";
-				}
-				else
-				{
-					after = input.substr(last, i - last);
-					tem = tem + after;
-					tem = tem + "separator\t" + t + "\n";
-				}
-				last = i + 1;
 			}
-			else
-				swi = false;
+			else{
+			counter--;
+			}
 		}
 	}
-	if (last == 1)
+	if (last != input.length()-1)
 	{
 		after = input.substr(last, input.length() - last);
 		if (isIdentifier(after))
-			tem = tem + "identifier\t" + after;
+			tem = tem + "identifier\t" + after+"\n";
 		else if (isKeyword(after))
-			tem = tem + "keyword\t\t" + after;
+			tem = tem + "keyword\t\t" + after + "\n";
 		else if (isInteger(after))
-			tem = tem + "integer\t\t" + after;
+			tem = tem + "integer\t\t" + after + "\n";
 		else if (isReal(after))
-			tem = tem + "real\t" + after;
+			tem = tem + "real\t\t" + after + "\n";
 		else
-			tem = tem + after;
+			tem = tem +"\t\t"+ after + "\n";
 	}
-	if (tem != "")
+	if (tem != "") {
 		tem = tem.substr(0, tem.length() - 1);
+	}
 	return tem;
 }
 
