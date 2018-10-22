@@ -41,52 +41,63 @@ bool isSeparator(string input)
 	return false;
 }
 
-bool isInteger(string input)
-{
-	string::const_iterator it = input.begin();
-	while ((it != input.end()) && (isdigit(*it)))
-	{
-		++it;
+bool isInteger(string input) {
+	int table[2][1] = { 1,1 };
+	int state = 0;
+	int col;
+	for (int i = 0; i < input.length(); i++) {
+		if (isdigit(input[i])) {
+			col = 0;
+		}
+		else { return false; }
+		state = table[state][col];
 	}
-	return ((!input.empty()) && (it == input.end()));
-}
-
-bool isReal(string input)
-{
-	int dot = input.find('.');
-	if (dot != -1)
-	{
-		for (int i = 0; i < dot; ++i)
-		{
-			if (!isdigit(input[i]))
-				return false;
-		}
-		for (int j = dot + 1; j < input.length(); ++j)
-		{
-			if (!isdigit(input[j]))
-				return false;
-		}
+	if (state == 1) {
 		return true;
 	}
-	else return false;
+	return false;
 }
 
-bool isIdentifier(string input)
-{
-	int len = input.length();
-	if (len == 1)
-		return (isalpha(input[0]));
-	else if ((!isalpha(input[0])) || (!isalpha(input[len - 1])))
-		return false;
-	else
-	{
-		for (int i = 1; i < len - 1; ++i)
-		{
-			if (!isalnum(input[i]))
-				return false;
+bool isReal(string input) {
+	int table[4][2] = { 1,0,1,2,3,0,3,0 };
+	int state = 0;
+	int col;
+	for (int i = 0; i < input.length(); i++) {
+		if (isdigit(input[i])) {
+			col = 0;
 		}
+		else if (input[i] == '.') {
+			col = 1;
+		}
+		else return false;
+		state = table[state][col];
+	}
+	if (state == 3) {
 		return true;
 	}
+	return false;
+}
+
+bool isIdentifier(string input) {
+	int table[4][2] = { 1,0,2,3,2,3,2,3 };
+	int state = 0;
+	int col;
+	for (int i = 0; i < input.length(); i++) {
+		if (isalpha(input[i])) {
+			col = 0;
+		}
+		else if (isdigit(input[i])) {
+			col = 1;
+		}
+		else {
+			return false;
+		}
+		state = table[state][col];
+	}
+	if (state == 1 || state == 2) {
+		return true;
+	}
+	return false;
 }
 
 //delete comments inclosed in "[*" and "*]" from a string vector
@@ -179,7 +190,7 @@ string sep(string input)
 						else
 						{
 							after = input.substr(last, i - last);
-							tem = tem + "\t\t" + after + "\n";
+							tem = tem + "illegal\t\t" + after + "\n";
 							tem = tem + "operator\t" + te + "\n";
 						}
 						last = i + 2;
@@ -210,7 +221,7 @@ string sep(string input)
 						else
 						{
 							after = input.substr(last, i - last);
-							tem = tem + "\t\t" + after + "\n";
+							tem = tem + "illegal\t\t" + after + "\n";
 							tem = tem + "separator\t" + te + "\n";
 						}
 						last = i + 2;
@@ -246,7 +257,7 @@ string sep(string input)
 						else
 						{
 							after = input.substr(last, i - last);
-							tem = tem + "\t\t" + after + "\n";
+							tem = tem + "illegal\t\t" + after + "\n";
 							tem = tem + "operator\t" + t + "\n";
 						}
 						last = i + 1;
@@ -276,7 +287,7 @@ string sep(string input)
 						else
 						{
 							after = input.substr(last, i - last);
-							tem = tem + "\t\t" + after + "\n";
+							tem = tem + "illegal\t\t" + after + "\n";
 							tem = tem + "separator\t" + t + "\n";
 						}
 						last = i + 1;
@@ -302,7 +313,7 @@ string sep(string input)
 		else if (isReal(after))
 			tem = tem + "real\t\t" + after + "\n";
 		else
-			tem = tem + "\t\t" + after + "\n";
+			tem = tem + "illegal\t\t" + after + "\n";
 	}
 	//delete last \n to avoid blanks 
 	if (tem != "")
