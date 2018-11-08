@@ -1,39 +1,45 @@
 #pragma once
 #include<string>
+
+//pro1: read token from file
+//pro2: write to file
+//pro3: where to put counter
+//pro4: call lexer
+
 // just a temp token to avoid bug notation
 string token;
-static int counter=1;
+static int counter;
 
 bool Rat18F();//1
-bool Opt_Function_Definitions();//*2
-bool Function_Definitions();//*3
+bool Opt_Function_Definitions();//2
+bool Function_Definitions();//3
 bool Function();//4
-bool Opt_Parameter_List();//*5
-bool Parameter_List();//*6
+bool Opt_Parameter_List();//5
+bool Parameter_List();//6
 bool Parameter();//7
 bool Qualifier(); //8
 bool Body();//9
-bool Opt_Declaration_List();//*10
-bool Declaration_List();//*11
+bool Opt_Declaration_List();//10
+bool Declaration_List();//11
 bool Declaration();//12
-bool IDs();//*13
-bool Statement_List();//*14
-bool Statement();//*15
+bool IDs();//13
+bool Statement_List();//14
+bool Statement();//15
 //16 same as body
 bool Assign();//17
-bool If();//*18
-bool Return();//*19
+bool If();//18
+bool Return();//19
 bool Print();//20
 bool Scan();//21
 bool While();//22
 bool Condition();//23
 bool Relop();//24
-bool Expression1();//*25.1
+bool Expression1();//25.1
 bool Expression2();//25.2
-bool Term1();//*26.1
+bool Term1();//26.1
 bool Term2();//26.2
 bool Factor();//27
-bool Primary();//*28
+bool Primary();//28
 bool Empty();//29
 
 bool Rat18F() {
@@ -45,7 +51,8 @@ bool Rat18F() {
 					//<Rat18F> -> <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
 				}
 				else {
-					//error
+					//lexer
+					//"$$" expected
 					return false;
 				}
 			}
@@ -59,7 +66,8 @@ bool Rat18F() {
 		}
 	}
 	else {
-		//error
+		//lexer
+		//"$$" expected
 		return false;
 	}
 	return true;
@@ -73,7 +81,6 @@ bool Opt_Function_Definitions() {
 		//<Opt Function Definitions> -> <Empty>
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -89,7 +96,6 @@ bool Function_Definitions() {
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -107,37 +113,38 @@ bool Function() {
 								//<Function> -> function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
 							}
 							else {
-								//error
 								return false;
 							}
 						}
 						else {
-							//error
 							return false;
 						}
 					}
 					else {
-						//error
+						//lexer
+						//")" expected
 						return false;
 					}
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 			else {
-				//error
+				//lexer
+				//"(" expected
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//Identifier expected
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//"function" expected
 		return false;
 	}
 	return true;
@@ -151,7 +158,6 @@ bool Opt_Parameter_List() {
 		//<Opt Parameter List> -> <Empty>
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -164,7 +170,6 @@ bool Parameter_List() {
 				//<Parameter List> -> <Parameter> , <Parameter List>
 			}
 			else {
-				//error
 				return false;
 			}
 		}
@@ -173,7 +178,6 @@ bool Parameter_List() {
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -186,17 +190,16 @@ bool Parameter() {
 				//<Parameter> -> <IDs > : <Qualifier> 
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//":" expected
 			return false;
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -213,7 +216,8 @@ bool Qualifier() {
 		//<Qualifier> -> real
 	}
 	else {
-		//error
+		//lexer
+		//"int", "boolean", "real" expected
 		return false;
 	}
 	return true;
@@ -226,17 +230,18 @@ bool Body() {
 				//<Body> -> { < Statement List> }
 			}
 			else {
-				//error
+				//lexer
+				//"}" expected
 				return false;
 			}
 		}
 		else {
-			//error
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//"{" expected
 		return false;
 	}
 	return true;
@@ -250,7 +255,6 @@ bool Opt_Declaration_List() {
 		//<Opt Declaration List> -> <Empty>
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -267,12 +271,12 @@ bool Declaration_List() {
 			}
 		}
 		else {
-			//error
+			//lexer
+			//";" expected
 			return false;
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -284,12 +288,10 @@ bool Declaration() {
 			// <Declaration> -> <Qualifier > <IDs>   
 		}
 		else {
-			//error
 			return false;
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -303,7 +305,6 @@ bool IDs() {
 				//<IDs> -> <Identifier>, <IDs>
 			}
 			else {
-				//error
 				return false;
 			}
 		}
@@ -312,7 +313,8 @@ bool IDs() {
 		}
 	}
 	else {
-		//error
+		//lexer
+		//identifier expected
 		return false;
 	}
 	return true;
@@ -328,7 +330,6 @@ bool Statement_List() {
 		}
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -357,7 +358,6 @@ bool Statement() {
 		//<Statement> -> <While> 
 	}
 	else {
-		//error
 		return false;
 	}
 	return true;
@@ -372,22 +372,24 @@ bool Assign() {
 					//<Assign> -> <Identifier> = <Expression1>;
 				}
 				else {
-					//error
+					//lexer
+					//";" expected
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//"=" expected
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//identifier expected
 		return false;
 	}
 	return true;
@@ -414,13 +416,13 @@ bool If() {
 								}
 								//8
 								else {
-									//error
+									//lexer
+									//"ifend" expected
 									return false;
 								}
 							}
 							//7
 							else {
-								//error
 								return false;
 							}
 						}
@@ -429,37 +431,39 @@ bool If() {
 						}
 						//6
 						else {
-							//error
+							//lexer
+							//"else" expected
 							return false;
 						}
 					}
 					//5
 					else {
-						//error
 						return false;
 					}
 				}
 				//4
 				else {
-					//error
+					//lexer
+					//")" expected
 					return false;
 				}
 			}
 			//3
 			else {
-				//error
 				return false;
 			}
 		}	
 		//2
 		else {
-			//error
+			//lexer
+			//"(" expected
 			return false;
 		}
 	}
 	//1
 	else {
-			//error
+		//lexer
+		//if expected
 			return false;
 	}
 	return true;
@@ -475,17 +479,18 @@ bool Return() {
 				//<Return> -> return; | return <Expression1>;
 			}
 			else {
-				//error
+				//lexer
+				//";" expected
 				return false;
 			}
 		}
 		else {
-			//error
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//return expected
 		return false;
 		}
 	return true;
@@ -500,27 +505,30 @@ bool Print() {
 						//<Print> -> put ( <Expression1>);
 					}
 					else {
-						//error
+						//lexer
+						//";" expected
 						return false;
 					}
 				}
 				else {
-					//error
+					//lexer
+					//")" expected
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//"(" expected
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//put expected
 		return false;
 	}
 	return true;
@@ -535,27 +543,30 @@ bool Scan() {
 						//<Scan> ->    get ( <IDs> );
 					}
 					else {
-						//error
+						//lexer
+						//";" expected
 						return false;
 					}
 				}
 				else {
-					//error
+					//lexer
+					//")" expected
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//"(" expected
 			return false;
 		}
 	}
 	else {
-		//error
+		//lexer
+		//get expected
 		return false;
 	}
 	return true;
@@ -571,32 +582,34 @@ bool While() {
 						//<While> ->  while ( <Condition>  )  <Statement>  whileend
 					}
 					else {
-						//error
+						//lexer
+						//whileend expected
 						return false;
 					}
 				}
 				else {
-					//error
 					return false;
 				}
 				}
 				else {
-					//error
+					//lexer
+					//")" expected
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 			else {
-				//error
+				//lexer
+				//"(" expected
 				return false;
 			}
 		}
 		else {
-			//error
+			//lexer
+			//while expected
 			return false;
 		}
 		return true;
@@ -609,17 +622,14 @@ bool While() {
 					//<Condition> -> <Expression1>  <Relop>   <Expression1>
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
@@ -645,7 +655,8 @@ bool While() {
 			//<Relop> -> =<
 		}
 		else {
-			//error
+			//lexer
+			//"==", "^=", ">", "<", "=>", "=<" expected
 			return false;
 		}
 		return true;
@@ -657,12 +668,10 @@ bool While() {
 				//<Expression1>  -> <Term2> <Expression2>
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
@@ -675,12 +684,10 @@ bool While() {
 					//<Expression2>  ->   + <Term2> <Expression2> 
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
@@ -690,20 +697,17 @@ bool While() {
 					//<Expression2>  ->   - <Term2> <Expression2>
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else if (Empty()) {
-			
+			//<Expression2> -> <Empty>
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
@@ -715,17 +719,15 @@ bool While() {
 				//<Term2>  -> <Factor> <Term2>
 			}
 			else {
-				//error
 				return false;
 			}
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
 	}
-	//???
+
 	bool Term2() {
 		if (token == "*") {
 			if (Factor()) {
@@ -733,12 +735,10 @@ bool While() {
 					//<Term2>    -> *  <Factor> <Term2> 
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 				}
 		}
@@ -748,20 +748,17 @@ bool While() {
 					//<Term> -> /  <Factor> <Term>
 				}
 				else {
-					//error
 					return false;
 				}
 			}
 		else {
-				//error
 				return false;
 		}
 		}
-		else if (Factor()) {
-			//<Term> -> <Factor>
+		else if (Empty()) {
+			//<Term2> -> <Empty>
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
@@ -773,7 +770,6 @@ bool While() {
 				//<Factor> -> -<Primary>
 			}
 			else {
-				//error
 				return false;
 			}
 		}
@@ -781,7 +777,6 @@ bool While() {
 			//<Factor> -> <Primary>
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
@@ -796,12 +791,12 @@ bool While() {
 						//<Primary> -> <Identifier>  (<IDs>)
 					}
 					else {
-						//error
+						//lexer
+						//")" expected
 						return false;
 					}
 				}
 				else {
-					//error
 					return false;
 				}
 			}
@@ -819,12 +814,12 @@ bool While() {
 					//<Primary> -> ( <Expression> )
 				}
 				else {
-					//error
+					//lexer
+					//")" expected
 					return false;
 				}
 			}
 			else {
-				//error
 				return false;
 			}
 		}
@@ -839,13 +834,12 @@ bool While() {
 			//<Primary> -> false
 		}
 		else {
-			//error
 			return false;
 		}
 		return true;
 	}
 
 	bool Empty() {
-		//<Empty>   -> 
+		//<Empty> -> 
 		return true;
 	}
