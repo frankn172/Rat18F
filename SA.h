@@ -6,7 +6,7 @@
 //pro3: where to put counter
 //pro4: call lexer
 
-// just a temp token to avoid bug notation
+// just a temp token to avoid bug
 string token;
 static int counter;
 
