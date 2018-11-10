@@ -1,11 +1,12 @@
 ﻿  Source.cpp
-c:\users\admin\source\repos\rat18f\la.h(49): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\la.h(70): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\la.h(95): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\la.h(125): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\sep.h(20): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\sep.h(190): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\sa.h(61): warning C4018: '<': signed/unsigned mismatch
-c:\users\admin\source\repos\rat18f\source.cpp(17): warning C4101: 'start_point': unreferenced local variable
-c:\users\admin\source\repos\rat18f\source.cpp(17): warning C4101: 'end_point': unreferenced local variable
+c:\users\admin\source\repos\rat18f\la.h(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(110): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(186): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(356): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\sa.h(58): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\source.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\source.cpp(18): warning C4101: 'start_point': unreferenced local variable
+c:\users\admin\source\repos\rat18f\source.cpp(18): warning C4101: 'end_point': unreferenced local variable
   Rat18F.vcxproj -> C:\Users\admin\source\repos\Rat18F\Debug\Rat18F.exe

@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="LA.h" />
     <ClInclude Include="SA.h" />
-    <ClInclude Include="sep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
