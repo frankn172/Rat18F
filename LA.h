@@ -227,37 +227,7 @@ void sep(vector<string> &t, string input) {
 						}
 						last = i + 2;
 					}
-					//same as OP
-					else if (isSeparator(te))
-					{
-						if (i == 0)
-						{
-							t.push_back(te);
-							last += 1;
-						}
-						else if (swi)
-						{
-							after = input.substr(last, i - last);
-							if (isKeyword(after))
-								t.push_back(after);
-							else if (isIdentifier(after))
-								t.push_back(after);
-							else if (isInteger(after))
-								t.push_back(after);
-							else if (isReal(after))
-								t.push_back(after);
-							else
-								t.push_back(after);
-							t.push_back(te);
-						}
-						else
-						{
-							after = input.substr(last, i - last);
-							t.push_back(after);
-							t.push_back(te);
-						}
-						last = i + 2;
-					}
+
 					counter = 2;
 				}
 				//single byte symbol, basically same as above
@@ -347,7 +317,6 @@ void sep(vector<string> &t, string input) {
 		else
 			t.push_back(after);
 	}
-
 }
 
 //separate string
@@ -380,6 +349,18 @@ void sepa(vector<string> v, vector<string> &t, vector<int> c)
 			else if (isOperator(input))
 				t.push_back(input);
 			else sep(t, input);
+		}
+	}
+}
+
+void deletespace(vector<string> &t) {
+	int i = 0;
+	while (i < t.size()) {
+		if (t.at(i) == "") {
+			t.erase(t.begin() + i);
+		}
+		else {
+			++i;
 		}
 	}
 }
