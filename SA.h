@@ -97,7 +97,8 @@ bool Rat18F() {
 }
 
 bool Opt_Function_Definitions() {
-	if (Function_Definitions()) {
+	if (t[i]=="function") {
+		Function_Definitions();
 		v.push_back("<Opt Function Definitions> -> <Function Definitions>");
 	}
 	else if (Empty()) {
@@ -110,7 +111,8 @@ bool Opt_Function_Definitions() {
 }
 
 bool Function_Definitions() {
-	if (Function()) {
+	if (t[i] == "function") {
+		Function();
 		if (Function_Definitions()) {
 			v.push_back("<Function Definitions> -> <Function> <Function Definitions>");
 		}
@@ -181,7 +183,8 @@ bool Function() {
 }
 
 bool Opt_Parameter_List() {
-	if (Parameter_List()) {
+	if (isIdentifier(t[i])) {
+		Parameter_List();
 		v.push_back("<Opt Parameter List> -> <Parameter List>");
 	}
 	else if (Empty()) {
@@ -195,8 +198,8 @@ bool Opt_Parameter_List() {
 
 bool Parameter_List() {
 	if (Parameter()) {
-		token = gettoken();
-		if (token == ",") {
+		if (t[i] == ",") {
+			token = gettoken();
 			lexer(v, token);
 			if (Parameter_List()) {
 				v.push_back("<Parameter List> -> <Parameter> , <Parameter List>");
@@ -290,7 +293,8 @@ bool Body() {
 }
 
 bool Opt_Declaration_List() {
-	if (Declaration_List()) {
+	if (t[i]=="int"|| t[i] == "boolean" || t[i] == "real" ) {
+		Declaration_List();
 		v.push_back("<Opt Declaration List> -> <Declaration List>");
 	}
 	else if (Empty()) {
@@ -303,7 +307,8 @@ bool Opt_Declaration_List() {
 }
 
 bool Declaration_List() {
-	if (Declaration()) {
+	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real") {
+		Declaration();
 		token = gettoken();
 		if (token == ";") {
 			lexer(v, token);
@@ -344,10 +349,12 @@ bool Declaration() {
 bool IDs() {
 	token = gettoken();
 	if (isIdentifier(token)) {
-		token = gettoken();
-		if (token == ",") {
+		lexer(v, token);
+		if (t[i] == ",") {
+			token = gettoken();
 			lexer(v, token);
-			if (IDs()) {
+			if (isIdentifier(t[i])) {
+				IDs();
 				v.push_back("<IDs> -> <Identifier>, <IDs>");
 			}
 			else {
@@ -368,7 +375,8 @@ bool IDs() {
 
 bool Statement_List() {
 	if (Statement()) {
-		if (Statement_List()) {
+		if (t[i] == "{" || t[i] == "if" || t[i] == "return"||t[i] == "put" || t[i] == "get" || t[i] == "while"||isIdentifier(t[i])) {
+			Statement_List();
 			v.push_back("<Statement List> -> <Statement> <Statement List>");
 		}
 		else {
@@ -382,41 +390,41 @@ bool Statement_List() {
 }
 
 bool Statement() {
-	bool swi = false;
-	if (Compound()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <Compound>");
+	if (t[i]=="{") {
+		if(Compound())
+			v.push_back("<Statement> -> <Compound>");
+		else 
+			return false;
 	}
-	else if (Assign()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <Assign>");
+	else if (t[i] == "if") {
+		if(If())
+			v.push_back("<Statement> -> <If>");
+		else return false;
 	}
-	else if (If()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <If>");
-	}
-	else if (Return()) {
-		swi = true;
-		Compound();
+	else if (t[i] == "return") {
+		if (Return())
 		v.push_back("<Statement> -> <Return>");
+		else return false;
 	}
-	else if (Print()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <Print>");
+	else if (t[i] == "put") {
+		if(Print())
+			v.push_back("<Statement> -> <Print>");
+		else return false;
 	}
-	else if (Scan()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <Scan>");
+	else if (t[i] == "get") {
+		if(Scan())
+			v.push_back("<Statement> -> <Scan>");
+		else return false;
 	}
-	else if (While()) {
-		swi = true;
-		Compound();
-		v.push_back("<Statement> -> <While>");
+	else if (t[i] == "while") {
+		if(While())
+			v.push_back("<Statement> -> <While>");
+		else return false;
+	}
+	else if (isIdentifier(t[i])) {
+		if(Assign())
+			v.push_back("<Statement> -> <Assign>");
+		else return false;
 	}
 	else {
 		lexer(v, token);
@@ -451,6 +459,7 @@ bool Compound() {
 }
 
 bool Assign() {
+	token = gettoken();
 	if (isIdentifier(token)) {
 		lexer(v, token);
 		token = gettoken();
@@ -481,6 +490,7 @@ bool Assign() {
 }
 
 bool If() {
+	token = gettoken();
 	//1
 	if (token == "if") {
 		lexer(v, token);
@@ -556,10 +566,11 @@ bool If() {
 }
 
 bool Return() {
+	token = gettoken();
 	if (token == "return") {
 		lexer(v, token);
-		token = gettoken();
-		if (token == ";") {
+		if (t[i] == ";") {
+			token = gettoken();
 			lexer(v, token);
 			v.push_back("<Return> -> return;");
 		}
@@ -584,12 +595,12 @@ bool Return() {
 }
 
 bool Print() {
+	token = gettoken();
 	if (token == "put") {
 		lexer(v, token);
 		token = gettoken();
 		if (token == "(") {
 			lexer(v, token);
-			token = gettoken();
 			if (Expression1()) {
 				token = gettoken();
 				if (token == ")") {
@@ -622,6 +633,7 @@ bool Print() {
 }
 
 bool Scan() {
+	token = gettoken();
 	if (token == "get") {
 		lexer(v, token);
 		token = gettoken();
@@ -659,6 +671,7 @@ bool Scan() {
 }
 
 bool While() {
+	token = gettoken();
 	if (token == "while") {
 		lexer(v, token);
 		token = gettoken();
@@ -675,6 +688,7 @@ bool While() {
 							v.push_back("<While> ->  while ( <Condition>  )  <Statement>  whileend");
 						}
 						else {
+							v.push_back("whileend expected");
 							return false;
 						}
 					}
@@ -755,7 +769,7 @@ bool Relop() {
 }
 
 bool Expression1() {
-	if (Term2()) {
+	if (Term1()) {
 		if (Expression2()) {
 			v.push_back("<Expression1>  -> <Term2> <Expression2>");
 		}
@@ -770,10 +784,10 @@ bool Expression1() {
 }
 
 bool Expression2() {
-	token = gettoken();
-	if (token == "+") {
+	if (t[i] == "+") {
+		token = gettoken();
 		lexer(v, token);
-		if (Term2()) {
+		if (Term1()) {
 			if (Expression2()) {
 				v.push_back("<Expression2>  ->   + <Term2> <Expression2>");
 			}
@@ -785,9 +799,10 @@ bool Expression2() {
 			return false;
 		}
 	}
-	else if (token == "-") {
+	else if (t[i] == "-") {
+		token = gettoken();
 		lexer(v, token);
-		if (Term2()) {
+		if (Term1()) {
 			if (Expression2()) {
 				v.push_back("<Expression2> -> - <Term2> <Expression2>");
 			}
@@ -824,8 +839,8 @@ bool Term1() {
 }
 
 bool Term2() {
-	token = gettoken();
-	if (token == "*") {
+	if (t[i] == "*") {
+		token = gettoken();
 		lexer(v, token);
 		if (Factor()) {
 			if (Term2()) {
@@ -839,7 +854,8 @@ bool Term2() {
 			return false;
 		}
 	}
-	else if (token == "/") {
+	else if (t[i] == "/") {
+		token = gettoken();
 		lexer(v, token);
 		if (Factor()) {
 			if (Term2()) {
@@ -863,8 +879,8 @@ bool Term2() {
 }
 
 bool Factor() {
-	token = gettoken();
-	if (token == "-") {
+	if (t[i] == "-") {
+		token = gettoken();
 		lexer(v, token);
 		if (Primary()) {
 			v.push_back("<Factor> -> -<Primary>");
@@ -884,10 +900,18 @@ bool Factor() {
 
 bool Primary() {
 	token = gettoken();
-	if (isIdentifier(token)) {
+	if (token == "true") {
 		lexer(v, token);
-		token = gettoken();
-		if (token == "(") {
+		v.push_back("<Primary> -> true");
+	}
+	else if (token == "false") {
+		lexer(v, token);
+		v.push_back("<Primary> -> false");
+	}
+	else if (isIdentifier(token)) {
+		lexer(v, token);
+		if (t[i] == "(") {
+			token = gettoken();
 			lexer(v, token);
 			if (IDs()) {
 				token = gettoken();
@@ -935,14 +959,7 @@ bool Primary() {
 		lexer(v, token);
 		v.push_back("<Primary> -> <Real>");
 	}
-	else if (token == "true") {
-		lexer(v, token);
-		v.push_back("<Primary> -> true");
-	}
-	else if (token == "false") {
-		lexer(v, token);
-		v.push_back("<Primary> -> false");
-	}
+
 	else {
 		lexer(v, token);
 		v.push_back("'Identifier', 'Integer', 'Identifier ( <IDs> )', '( <Expression> )', 'Real', 'true', 'false' expected");
