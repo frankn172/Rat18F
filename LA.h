@@ -41,60 +41,75 @@ bool isSeparator(string input)
 	return false;
 }
 
-bool isInteger(string input) {
+bool isInteger(string input)
+{
 	int table[2][1] = { 1,1 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isdigit(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isdigit(input[i]))
+		{
 			col = 0;
 		}
 		else { return false; }
 		state = table[state][col];
 	}
-	if (state == 1) {
+	if (state == 1)
+	{
 		return true;
 	}
 	return false;
 }
 
-bool isReal(string input) {
+bool isReal(string input)
+{
 	int table[4][2] = { 1,0,1,2,3,0,3,0 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isdigit(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isdigit(input[i]))
+		{
 			col = 0;
 		}
-		else if (input[i] == '.') {
+		else if (input[i] == '.')
+		{
 			col = 1;
 		}
 		else return false;
 		state = table[state][col];
 	}
-	if (state == 3) {
+	if (state == 3)
+	{
 		return true;
 	}
 	return false;
 }
 
-bool isIdentifier(string input) {
+bool isIdentifier(string input)
+{
 	int table[4][2] = { 1,0,2,3,2,3,2,3 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isalpha(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isalpha(input[i]))
+		{
 			col = 0;
 		}
-		else if (isdigit(input[i])) {
+		else if (isdigit(input[i]))
+		{
 			col = 1;
 		}
-		else {
+		else
+		{
 			return false;
 		}
 		state = table[state][col];
 	}
-	if (state == 1 || state == 2) {
+	if (state == 1 || state == 2)
+	{
 		return true;
 	}
 	return false;

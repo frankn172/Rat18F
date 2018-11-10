@@ -40,13 +40,13 @@ int main()
 	}
 
 	deleteComment(input);
-	sepa(input,token,line);
+	sepa(input, token, line);
 	passvec1(token);
 	passvec2(output);
-	for (int i = 0; i < input.size(); ++i)
+	/*for (int i = 0; i < input.size(); ++i)
 	{
-		
-	}
+
+	}*/
 
 	f.close();
 	g.close();

@@ -1,8 +1,13 @@
+//CPSC 323
+//Compiler Project
+//Frank Ngo & Yifei Feng
+
 #pragma once
 #include<string>
 using namespace std;
 
-void sep(vector<string> t, string input) {
+void sep(vector<string> t, string input)
+{
 	//point to last symbol
 	int last = 0;
 	//string after last symbol
@@ -179,34 +184,37 @@ void sep(vector<string> t, string input) {
 }
 
 //separate string
-void sepa(vector<string> v,vector<string> t, vector<int> c)
+void sepa(vector<string> v, vector<string> t, vector<int> c)
 {
-	for(int a=0;a<v.size();a++){
-		string input = v.at[a];
-	string::const_iterator fir = input.begin();
-	//go to special case if not match common case
-	if (isdigit(*fir))
+	string input;
+	for (int a = 0; a < v.size(); a++)
 	{
-		if (isInteger(input))
-			t.push_back(input);
-		else if (isReal(input))
-			t.push_back(input);
-		else sep(t,input);
-	}
-	else if (isalpha(*fir))
-	{
-		if (isKeyword(input))
-			t.push_back(input);
-		else if (isIdentifier(input))
-			t.push_back(input);
-		else sep(t,input);
-	}
-	else
-	{
-		if (isSeparator(input))
-			t.push_back(input);
-		else if (isOperator(input))
-			t.push_back(input);
-		else sep(t,input);
+		input = v.at(a);
+		string::const_iterator fir = input.begin();
+		//go to special case if not match common case
+		if (isdigit(*fir))
+		{
+			if (isInteger(input))
+				t.push_back(input);
+			else if (isReal(input))
+				t.push_back(input);
+			else sep(t, input);
+		}
+		else if (isalpha(*fir))
+		{
+			if (isKeyword(input))
+				t.push_back(input);
+			else if (isIdentifier(input))
+				t.push_back(input);
+			else sep(t, input);
+		}
+		else
+		{
+			if (isSeparator(input))
+				t.push_back(input);
+			else if (isOperator(input))
+				t.push_back(input);
+			else sep(t, input);
+		}
 	}
 }

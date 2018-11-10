@@ -1,8 +1,11 @@
-﻿  main.cpp
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(64): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(99): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\headers.h(143): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(38): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'start_point': unreferenced local variable
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(12): warning C4101: 'end_point': unreferenced local variable
-  Rat18F.vcxproj -> C:\Users\livel\OneDrive - Cal State Fullerton\2018 Fall\CPSC 323\Project\Rat18F\Debug\Rat18F.exe
+﻿  Source.cpp
+c:\users\admin\source\repos\rat18f\la.h(49): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(70): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(95): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\la.h(125): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\sep.h(20): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\sep.h(190): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\sa.h(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\admin\source\repos\rat18f\source.cpp(17): warning C4101: 'start_point': unreferenced local variable
+c:\users\admin\source\repos\rat18f\source.cpp(17): warning C4101: 'end_point': unreferenced local variable
+  Rat18F.vcxproj -> C:\Users\admin\source\repos\Rat18F\Debug\Rat18F.exe
