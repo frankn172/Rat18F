@@ -1,15 +1,8 @@
-//CPSC 323
-//Compiler Project
-//Frank Ngo & Yifei Feng
-
 #pragma once
 #include<string>
 using namespace std;
 
-//pro1: where to put counter
-
 string token;
-static int counter;
 vector<string> t;
 vector<string> v;
 int i = 0;
