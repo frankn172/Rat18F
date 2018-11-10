@@ -40,23 +40,23 @@ int main()
 		++i;
 	}
 
+
 	deleteComment(input);
 	sepa(input, token, line);
+	deletespace(token);
+
 	passvec1(token);
 	Rat18F();
 	passvec2(output);
-	for (int i = 0; i < input.size(); ++i)
+	for (int i = 0; i < output.size(); ++i)
 	{
 		g << output.at(i) << endl;
 	}
 
-	//deleteComment(input);
-	//sepa(input, token, line);
 	//for (int i = 0; i < token.size(); ++i)
 	//{
 	//	lexer(output, token.at(i));
 	//	g << output.at(i) << endl;
-
 	//}
 
 	f.close();
