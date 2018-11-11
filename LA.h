@@ -41,20 +41,21 @@ bool isSeparator(string input)
 	return false;
 }
 
-bool isInteger(string input) {
+bool isInteger(string input)
+{
 	int table[2][1] = { 1,1 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isdigit(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isdigit(input[i]))
 			col = 0;
-		}
-		else { return false; }
+		else
+			return false;
 		state = table[state][col];
 	}
-	if (state == 1) {
+	if (state == 1)
 		return true;
-	}
 	return false;
 }
 
@@ -62,41 +63,38 @@ bool isReal(string input) {
 	int table[4][2] = { 1,0,1,2,3,0,3,0 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isdigit(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isdigit(input[i]))
 			col = 0;
-		}
-		else if (input[i] == '.') {
+		else if (input[i] == '.')
 			col = 1;
-		}
-		else return false;
+		else
+			return false;
 		state = table[state][col];
 	}
-	if (state == 3) {
+	if (state == 3)
 		return true;
-	}
 	return false;
 }
 
-bool isIdentifier(string input) {
+bool isIdentifier(string input)
+{
 	int table[4][2] = { 1,0,2,3,2,3,2,3 };
 	int state = 0;
 	int col;
-	for (int i = 0; i < input.length(); i++) {
-		if (isalpha(input[i])) {
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isalpha(input[i]))
 			col = 0;
-		}
-		else if (isdigit(input[i])) {
+		else if (isdigit(input[i]))
 			col = 1;
-		}
-		else {
+		else
 			return false;
-		}
 		state = table[state][col];
 	}
-	if (state == 1 || state == 2) {
+	if (state == 1 || state == 2)
 		return true;
-	}
 	return false;
 }
 
@@ -146,7 +144,7 @@ void lexer(vector<string> &r, string input)
 	if (isdigit(input[0]))
 	{
 		if (isInteger(input))
-			r.push_back("Integer\t\t" + input);
+			r.push_back("integer\t\t" + input);
 		else if (isReal(input))
 			r.push_back("real\t\t" + input);
 		else
@@ -320,9 +318,10 @@ void sep(vector<string> &t, string input) {
 }
 
 //separate string
-void sepa(vector<string> v, vector<string> &t, vector<int> c)
+void stringsSeparator(vector<string> v, vector<string> &t, vector<int> c)
 {
-	for (int a = 0; a < v.size(); a++) {
+	for (int a = 0; a < v.size(); a++)
+	{
 		string input = v.at(a);
 		string::const_iterator fir = input.begin();
 		//go to special case if not match common case
@@ -353,14 +352,14 @@ void sepa(vector<string> v, vector<string> &t, vector<int> c)
 	}
 }
 
-void deletespace(vector<string> &t) {
+void deleteSpace(vector<string> &t)
+{
 	int i = 0;
-	while (i < t.size()) {
-		if (t.at(i) == "") {
+	while (i < t.size())
+	{
+		if (t.at(i) == "")
 			t.erase(t.begin() + i);
-		}
-		else {
+		else
 			++i;
-		}
 	}
 }

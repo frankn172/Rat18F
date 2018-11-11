@@ -4,30 +4,80 @@ keyword		function
 identifier	convert1x
 separator	(
 identifier	fahr
+<IDs> -> <Identifier>
 separator	:
 keyword		int
+<Qualifier> -> int
+<Parameter> -> <IDs > : <Qualifier>
+<Parameter List> -> <Parameter>
+<Opt Parameter List> -> <Parameter List>
 separator	)
+<Empty> ->
+<Opt Declaration List> -> <Empty>
 separator	{
 keyword		return
 integer		5
+<Primary> -> <Integer>
+<Factor> -> <Primary>
 operator	*
 separator	(
 identifier	fahr
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
 operator	-
 integer		32
+<Primary> -> <Integer>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression2> -> - <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 separator	)
+<Primary> -> ( <Expression> )
+<Factor> -> <Primary>
 operator	/
 integer		9
+<Primary> -> <Integer>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term> -> / <Factor> <Term>
+<Term2> -> * <Factor> <Term2>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1> -> <Term2> <Expression2>
 separator	;
+<Return> -> return; | return <Expression1>;
+<Statement> -> <Return>
+<Statement List> -> <Statement>
 separator	}
+<Body> -> { < Statement List> }
+<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>
+<Empty> ->
+<Function Definitions> -> <Function>
+<Opt Function Definitions> -> <Function Definitions>
 separator	$$
 keyword		int
+<Qualifier> -> int
 identifier	low
 separator	,
 identifier	high
 separator	,
 identifier	step
+<IDs> -> <Identifier>
+<IDs> -> <Identifier> , <IDs>
+<IDs> -> <Identifier> , <IDs>
+<Declaration> -> <Qualifier> <IDs>
 separator	;
+<Declaration List> -> <Declaration> ;
+<Opt Declaration List> -> <Declaration List>
 keyword		get
 separator	(
 identifier	low
@@ -35,35 +85,104 @@ separator	,
 identifier	high
 separator	,
 identifier	step
+<IDs> -> <Identifier>
+<IDs> -> <Identifier> , <IDs>
+<IDs> -> <Identifier> , <IDs>
 separator	)
 separator	;
+<Scan> -> get ( <IDs> );
+<Statement> -> <Scan>
 keyword		while
 separator	(
 identifier	low
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1> -> <Term2> <Expression2>
 operator	<
+<Relop> -> <
 identifier	high
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1> -> <Term2> <Expression2>
+<Condition> -> <Expression1> <Relop> <Expression1>
 separator	)
 separator	{
 keyword		put
 separator	(
 identifier	low
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1> -> <Term2> <Expression2>
 separator	)
 separator	;
+<Print> -> put ( <Expression1> );
+<Statement> -> <Print>
 keyword		put
 separator	(
 identifier	convert1x
 separator	(
 identifier	low
+<IDs> -> <Identifier>
 separator	)
+<Primary> -> <Identifier> (<IDs>)
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1> -> <Term2> <Expression2>
 separator	)
 separator	;
+<Print> -> put ( <Expression1> );
+<Statement> -> <Print>
 identifier	low
 operator	=
 identifier	low
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
 operator	+
 identifier	step
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression2> -> + <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 separator	;
+<Assign> -> <Identifier> = <Expression1>;
+<Statement> -> <Assign>
+<Statement List> -> <Statement>
+<Statement List> -> <Statement> <Statement List>
+<Statement List> -> <Statement> <Statement List>
 separator	}
+<Compound> -> { < Statement List> }
+<Statement> -> <Compound>
 keyword		whileend
+<While> -> while ( <Condition> ) <Statement> whileend
+<Statement> -> <While>
+<Statement List> -> <Statement>
+<Statement List> -> <Statement> <Statement List>
 separator	$$
-real		32.02
+<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List>  <Statement List> $$
