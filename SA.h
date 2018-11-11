@@ -112,8 +112,12 @@ bool Opt_Function_Definitions()
 {
 	if (t[i] == "function")
 	{
-		Function_Definitions();
-		v.push_back("<Opt Function Definitions> -> <Function Definitions>");
+		if(Function_Definitions()){
+			v.push_back("<Opt Function Definitions> -> <Function Definitions>");
+		}
+		else{
+			return false;
+		}
 	}
 	else if (Empty())
 		v.push_back("<Opt Function Definitions> -> <Empty>");
@@ -122,18 +126,23 @@ bool Opt_Function_Definitions()
 	return true;
 }
 
-bool Function_Definitions()
-{
-	if (t[i] == "function")
-	{
-		Function();
-		if (Function_Definitions())
-			v.push_back("<Function Definitions> -> <Function> <Function Definitions>");
-		else if (Empty())
-			v.push_back("<Function Definitions> -> <Function>");
+bool Function_Definitions() {
+	if (t[i] == "function") {
+		if (Function()) {
+			if (Function_Definitions()) {
+				v.push_back("<Function Definitions> -> <Function> <Function Definitions>");
+			}
+			else if (Empty()) {
+				v.push_back("<Function Definitions> -> <Function> ");
+			}
+		}
+		else {
+			return false;
+		}
 	}
-	else
+	else {
 		return false;
+	}
 	return true;
 }
 
@@ -200,17 +209,21 @@ bool Function()
 	return true;
 }
 
-bool Opt_Parameter_List()
-{
-	if (isIdentifier(t[i]))
-	{
-		Parameter_List();
-		v.push_back("<Opt Parameter List> -> <Parameter List>");
+bool Opt_Parameter_List() {
+	if (isIdentifier(t[i])) {
+		if (Parameter_List()) {
+			v.push_back("<Opt Parameter List> -> <Parameter List>");
+		}
+		else {
+			return false;
+		}
 	}
-	else if (Empty())
+	else if (Empty()) {
 		v.push_back("<Opt Parameter List> -> <Empty>");
-	else
+	}
+	else {
 		return false;
+	}
 	return true;
 }
 
@@ -320,43 +333,50 @@ bool Body()
 	return true;
 }
 
-bool Opt_Declaration_List()
-{
-	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real")
-	{
-		Declaration_List();
-		v.push_back("<Opt Declaration List> -> <Declaration List>");
-	}
-	else if (Empty())
-		v.push_back("<Opt Declaration List> -> <Empty>");
-	else
-		return false;
-	return true;
-}
-
-bool Declaration_List()
-{
-	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real")
-	{
-		Declaration();
-		token = getToken();
-		if (token == ";")
-		{
-			lexer(v, token);
-			if (Declaration_List())
-				v.push_back("<Declaration List> -> <Declaration> ; <Declaration List>");
-			else
-				v.push_back("<Declaration List> -> <Declaration> ;");
+bool Opt_Declaration_List() {
+	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real") {
+		if (Declaration_List()) {
+			v.push_back("<Opt Declaration List> -> <Declaration List>");
 		}
-		else
-		{
-			lexer(v, token);
-			v.push_back("';' expected");
+		else {
 			return false;
 		}
 	}
-	else
+	else if (Empty()) {
+		v.push_back("<Opt Declaration List> -> <Empty>");
+	}
+	else {
 		return false;
+	}
+	return true;
+}
+
+bool Declaration_List() {
+	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real") {
+		if (Declaration()) {
+			token = gettoken();
+			if (token == ";") {
+				lexer(v, token);
+				if (Declaration_List()) {
+					v.push_back("<Declaration List>  -> <Declaration> ; <Declaration List>");
+				}
+				else {
+					v.push_back("<Declaration List>  -> <Declaration> ;");
+				}
+			}
+			else {
+				lexer(v, token);
+				v.push_back("';' expected");
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
 	return true;
 }
 
@@ -374,29 +394,30 @@ bool Declaration()
 	return true;
 }
 
-bool IDs()
-{
-	token = getToken();
-	if (isIdentifier(token))
-	{
+bool IDs() {
+	token = gettoken();
+	if (isIdentifier(token)) {
 		lexer(v, token);
-		if (t[i] == ",")
-		{
-			token = getToken();
+		if (t[i] == ",") {
+			token = gettoken();
 			lexer(v, token);
-			if (isIdentifier(t[i]))
-			{
-				IDs();
-				v.push_back("<IDs> -> <Identifier> , <IDs>");
+			if (isIdentifier(t[i])) {
+				if (IDs()) {
+					v.push_back("<IDs> -> <Identifier>, <IDs>");
+				}
+				else {
+					return false;
+				}
 			}
-			else
+			else {
 				return false;
+			}
 		}
-		else
+		else {
 			v.push_back("<IDs> -> <Identifier>");
+		}
 	}
-	else
-	{
+	else {
 		lexer(v, token);
 		v.push_back("identifier expected");
 		return false;
@@ -404,20 +425,23 @@ bool IDs()
 	return true;
 }
 
-bool Statement_List()
-{
-	if (Statement())
-	{
-		if (t[i] == "{" || t[i] == "if" || t[i] == "return" || t[i] == "put" || t[i] == "get" || t[i] == "while" || isIdentifier(t[i]))
-		{
-			Statement_List();
-			v.push_back("<Statement List> -> <Statement> <Statement List>");
+bool Statement_List() {
+	if (Statement()) {
+		if (t[i] == "{" || t[i] == "if" || t[i] == "return" || t[i] == "put" || t[i] == "get" || t[i] == "while" || isIdentifier(t[i])) {
+			if (Statement_List()) {
+				v.push_back("<Statement List> -> <Statement> <Statement List>");
+			}
+			else {
+				return false;
+			}
 		}
-		else
+		else {
 			v.push_back("<Statement List> -> <Statement>");
+		}
 	}
-	else
+	else {
 		return false;
+	}
 	return true;
 }
 
