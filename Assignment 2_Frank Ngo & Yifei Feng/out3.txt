@@ -1,0 +1,5 @@
+	<Empty> ->
+	<Opt Function Definitions> -> <Empty>
+
+Token: identifier	Lexer: for
+	line 1; ' for ' error, '$$' expected

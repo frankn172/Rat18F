@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\admin\source\repos\rat18f\main.cpp(53): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\admin\source\repos\rat18f\main.cpp(56): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Rat18F.vcxproj -> C:\Users\admin\source\repos\Rat18F\x64\Debug\Rat18F.exe

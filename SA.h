@@ -1,3 +1,8 @@
+//CPSC 323
+//Compiler Project
+//Frank Ngo & Yifei Feng
+//SA.h
+
 #pragma once
 #include<string>
 using namespace std;
