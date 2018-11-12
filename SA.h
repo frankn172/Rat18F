@@ -80,12 +80,12 @@ bool Rat18F()
 					if (token == "$$")
 					{
 						lexer(v, token);
-						v.push_back("<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List> <Statement List> $$");
+						v.push_back("\t<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List> <Statement List> $$");
 					}
 					else
 					{
 						lexer(v, token);
-						v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '$$' expected");
+						v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '$$' expected");
 						return false;
 					}
 				}
@@ -98,7 +98,7 @@ bool Rat18F()
 		else
 		{
 			lexer(v, token);
-			v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '$$' expected");
+			v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '$$' expected");
 			return false;
 		}
 	}
@@ -112,12 +112,12 @@ bool Opt_Function_Definitions()
 	if (t[i] == "function")
 	{
 		if (Function_Definitions())
-			v.push_back("<Opt Function Definitions> -> <Function Definitions>");
+			v.push_back("\t<Opt Function Definitions> -> <Function Definitions>");
 		else
 			return false;
 	}
 	else if (Empty())
-		v.push_back("<Opt Function Definitions> -> <Empty>");
+		v.push_back("\t<Opt Function Definitions> -> <Empty>");
 	else
 		return false;
 	return true;
@@ -130,9 +130,9 @@ bool Function_Definitions()
 		if (Function())
 		{
 			if (Function_Definitions())
-				v.push_back("<Function Definitions> -> <Function> <Function Definitions>");
+				v.push_back("\t<Function Definitions> -> <Function> <Function Definitions>");
 			else if (Empty())
-				v.push_back("<Function Definitions> -> <Function>");
+				v.push_back("\t<Function Definitions> -> <Function>");
 		}
 		else
 			return false;
@@ -165,7 +165,7 @@ bool Function()
 						if (Opt_Declaration_List())
 						{
 							if (Body())
-								v.push_back("<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>");
+								v.push_back("\t<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>");
 							else
 								return false;
 						}
@@ -175,7 +175,7 @@ bool Function()
 					else
 					{
 						lexer(v, token);
-						v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
+						v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
 						return false;
 					}
 				}
@@ -185,21 +185,21 @@ bool Function()
 			else
 			{
 				lexer(v, token);
-				v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '(' expected");
+				v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '(' expected");
 				return false;
 			}
 		}
 		else
 		{
 			lexer(v, token);
-			v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, Identifier expected");
+			v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, Identifier expected");
 			return false;
 		}
 	}
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, 'function' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, 'function' expected");
 		return false;
 	}
 	return true;
@@ -210,12 +210,12 @@ bool Opt_Parameter_List()
 	if (isIdentifier(t[i]))
 	{
 		if (Parameter_List())
-			v.push_back("<Opt Parameter List> -> <Parameter List>");
+			v.push_back("\t<Opt Parameter List> -> <Parameter List>");
 		else
 			return false;
 	}
 	else if (Empty())
-		v.push_back("<Opt Parameter List> -> <Empty>");
+		v.push_back("\t<Opt Parameter List> -> <Empty>");
 	else
 		return false;
 	return true;
@@ -230,12 +230,12 @@ bool Parameter_List()
 			token = getToken();
 			lexer(v, token);
 			if (Parameter_List())
-				v.push_back("<Parameter List> -> <Parameter> , <Parameter List>");
+				v.push_back("\t<Parameter List> -> <Parameter> , <Parameter List>");
 			else
 				return false;
 		}
 		else
-			v.push_back("<Parameter List> -> <Parameter>");
+			v.push_back("\t<Parameter List> -> <Parameter>");
 	}
 	else
 		return false;
@@ -251,14 +251,14 @@ bool Parameter()
 		{
 			lexer(v, token);
 			if (Qualifier())
-				v.push_back("<Parameter> -> <IDs > : <Qualifier>");
+				v.push_back("\t<Parameter> -> <IDs > : <Qualifier>");
 			else
 				return false;
 		}
 		else
 		{
 			lexer(v, token);
-			v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, ':' expected");
+			v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, ':' expected");
 			return false;
 		}
 	}
@@ -273,22 +273,22 @@ bool Qualifier()
 	if (token == "int")
 	{
 		lexer(v, token);
-		v.push_back("<Qualifier> -> int");
+		v.push_back("\t<Qualifier> -> int");
 	}
 	else if (token == "boolean")
 	{
 		lexer(v, token);
-		v.push_back("<Qualifier> -> real");
+		v.push_back("\t<Qualifier> -> real");
 	}
 	else if (token == "real")
 	{
 		lexer(v, token);
-		v.push_back("<Qualifier> -> real");
+		v.push_back("\t<Qualifier> -> real");
 	}
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, 'int', 'boolean', 'real' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, 'int', 'boolean', 'real' expected");
 		return false;
 	}
 	return true;
@@ -306,12 +306,12 @@ bool Body()
 			if (token == "}")
 			{
 				lexer(v, token);
-				v.push_back("<Body> -> { < Statement List> }");
+				v.push_back("\t<Body> -> { < Statement List> }");
 			}
 			else
 			{
 				lexer(v, token);
-				v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '}' expected");
+				v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '}' expected");
 				return false;
 			}
 		}
@@ -321,7 +321,7 @@ bool Body()
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '{' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '{' expected");
 		return false;
 	}
 	return true;
@@ -332,12 +332,12 @@ bool Opt_Declaration_List()
 	if (t[i] == "int" || t[i] == "boolean" || t[i] == "real")
 	{
 		if (Declaration_List())
-			v.push_back("<Opt Declaration List> -> <Declaration List>");
+			v.push_back("\t<Opt Declaration List> -> <Declaration List>");
 		else
 			return false;
 	}
 	else if (Empty())
-		v.push_back("<Opt Declaration List> -> <Empty>");
+		v.push_back("\t<Opt Declaration List> -> <Empty>");
 	else
 		return false;
 	return true;
@@ -354,14 +354,14 @@ bool Declaration_List()
 			{
 				lexer(v, token);
 				if (Declaration_List())
-					v.push_back("<Declaration List> -> <Declaration> ; <Declaration List>");
+					v.push_back("\t<Declaration List> -> <Declaration> ; <Declaration List>");
 				else
-					v.push_back("<Declaration List> -> <Declaration>;");
+					v.push_back("\t<Declaration List> -> <Declaration>;");
 			}
 			else
 			{
 				lexer(v, token);
-				v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, ';' expected");
+				v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, ';' expected");
 				return false;
 			}
 		}
@@ -378,7 +378,7 @@ bool Declaration()
 	if (Qualifier())
 	{
 		if (IDs())
-			v.push_back("<Declaration> -> <Qualifier > <IDs>");
+			v.push_back("\t<Declaration> -> <Qualifier > <IDs>");
 		else
 			return false;
 	}
@@ -400,7 +400,7 @@ bool IDs()
 			if (isIdentifier(t[i]))
 			{
 				if (IDs())
-					v.push_back("<IDs> -> <Identifier>, <IDs>");
+					v.push_back("\t<IDs> -> <Identifier>, <IDs>");
 				else
 					return false;
 			}
@@ -408,12 +408,12 @@ bool IDs()
 				return false;
 		}
 		else
-			v.push_back("<IDs> -> <Identifier>");
+			v.push_back("\t<IDs> -> <Identifier>");
 	}
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, identifier expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, identifier expected");
 		return false;
 	}
 	return true;
@@ -426,12 +426,12 @@ bool Statement_List()
 		if (t[i] == "{" || t[i] == "if" || t[i] == "return" || t[i] == "put" || t[i] == "get" || t[i] == "while" || isIdentifier(t[i]))
 		{
 			if (Statement_List())
-				v.push_back("<Statement List> -> <Statement> <Statement List>");
+				v.push_back("\t<Statement List> -> <Statement> <Statement List>");
 			else
 				return false;
 		}
 		else
-			v.push_back("<Statement List> -> <Statement>");
+			v.push_back("\t<Statement List> -> <Statement>");
 	}
 	else
 		return false;
@@ -443,50 +443,50 @@ bool Statement()
 	if (t[i] == "{")
 	{
 		if (Compound())
-			v.push_back("<Statement> -> <Compound>");
+			v.push_back("\t<Statement> -> <Compound>");
 		else
 			return false;
 	}
 	else if (t[i] == "if")
 	{
 		if (If())
-			v.push_back("<Statement> -> <If>");
+			v.push_back("\t<Statement> -> <If>");
 		else return false;
 	}
 	else if (t[i] == "return")
 	{
 		if (Return())
-			v.push_back("<Statement> -> <Return>");
+			v.push_back("\t<Statement> -> <Return>");
 		else return false;
 	}
 	else if (t[i] == "put")
 	{
 		if (Print())
-			v.push_back("<Statement> -> <Print>");
+			v.push_back("\t<Statement> -> <Print>");
 		else return false;
 	}
 	else if (t[i] == "get")
 	{
 		if (Scan())
-			v.push_back("<Statement> -> <Scan>");
+			v.push_back("\t<Statement> -> <Scan>");
 		else return false;
 	}
 	else if (t[i] == "while")
 	{
 		if (While())
-			v.push_back("<Statement> -> <While>");
+			v.push_back("\t<Statement> -> <While>");
 		else return false;
 	}
 	else if (isIdentifier(t[i]))
 	{
 		if (Assign())
-			v.push_back("<Statement> -> <Assign>");
+			v.push_back("\t<Statement> -> <Assign>");
 		else return false;
 	}
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '{ <Statement List> }', '<Identifier> = <Expression> ;' ,'if ( <Condition> ) <Statement> ifend | if (<Condition>) <Statement> else <Statement> ifend ', 'return; | return <Expression>;', 'put ( <Expression>);', 'get ( <IDs> );', 'while ( <Condition> ) <Statement> whileend' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '{ <Statement List> }', '<Identifier> = <Expression> ;' ,'if ( <Condition> ) <Statement> ifend | if (<Condition>) <Statement> else <Statement> ifend ', 'return; | return <Expression>;', 'put ( <Expression>);', 'get ( <IDs> );', 'while ( <Condition> ) <Statement> whileend' expected");
 		return false;
 	}
 	return true;
@@ -504,7 +504,7 @@ bool Compound()
 			if (token == "}")
 			{
 				lexer(v, token);
-				v.push_back("<Compound> -> { < Statement List> }");
+				v.push_back("\t<Compound> -> { < Statement List> }");
 			}
 			else
 				return false;
@@ -533,7 +533,7 @@ bool Assign()
 				if (token == ";")
 				{
 					lexer(v, token);
-					v.push_back("<Assign> -> <Identifier> = <Expression1>;");
+					v.push_back("\t<Assign> -> <Identifier> = <Expression1>;");
 				}
 				else
 					return false;
@@ -586,7 +586,7 @@ bool If()
 								if (token == "ifend")
 								{
 									lexer(v, token);
-									v.push_back("<If> -> if ( <Condition>  ) <Statement> else <Statement> ifend");
+									v.push_back("\t<If> -> if ( <Condition>  ) <Statement> else <Statement> ifend");
 								}
 								//8
 								else
@@ -599,7 +599,7 @@ bool If()
 						else if (token == "ifend")
 						{
 							lexer(v, token);
-							v.push_back("<If> -> if (<Condition>) <Statement> ifend");
+							v.push_back("\t<If> -> if (<Condition>) <Statement> ifend");
 						}
 						//6
 						else
@@ -637,7 +637,7 @@ bool Return()
 		{
 			token = getToken();
 			lexer(v, token);
-			v.push_back("<Return> -> return;");
+			v.push_back("\t<Return> -> return;");
 		}
 		else if (Expression1())
 		{
@@ -645,7 +645,7 @@ bool Return()
 			if (token == ";")
 			{
 				lexer(v, token);
-				v.push_back("<Return> -> return; | return <Expression1>;");
+				v.push_back("\t<Return> -> return; | return <Expression1>;");
 			}
 			else
 				return false;
@@ -678,7 +678,7 @@ bool Print()
 					if (token == ";")
 					{
 						lexer(v, token);
-						v.push_back("<Print> -> put ( <Expression1> );");
+						v.push_back("\t<Print> -> put ( <Expression1> );");
 					}
 					else
 						return false;
@@ -717,7 +717,7 @@ bool Scan()
 					if (token == ";")
 					{
 						lexer(v, token);
-						v.push_back("<Scan> -> get ( <IDs> );");
+						v.push_back("\t<Scan> -> get ( <IDs> );");
 					}
 					else
 						return false;
@@ -758,11 +758,11 @@ bool While()
 						if (token == "whileend")
 						{
 							lexer(v, token);
-							v.push_back("<While> -> while ( <Condition>  ) <Statement> whileend");
+							v.push_back("\t<While> -> while ( <Condition>  ) <Statement> whileend");
 						}
 						else
 						{
-							v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, 'whileend' expected");
+							v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, 'whileend' expected");
 							return false;
 						}
 					}
@@ -790,7 +790,7 @@ bool Condition()
 		if (Relop())
 		{
 			if (Expression1())
-				v.push_back("<Condition> -> <Expression1> <Relop> <Expression1>");
+				v.push_back("\t<Condition> -> <Expression1> <Relop> <Expression1>");
 			else
 				return false;
 		}
@@ -808,37 +808,37 @@ bool Relop()
 	if (token == "==")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> ==");
+		v.push_back("\t<Relop> -> ==");
 	}
 	else if (token == "^=")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> ^=");
+		v.push_back("\t<Relop> -> ^=");
 	}
 	else if (token == ">")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> >");
+		v.push_back("\t<Relop> -> >");
 	}
 	else if (token == "<")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> <");
+		v.push_back("\t<Relop> -> <");
 	}
 	else if (token == "=>")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> =>");
+		v.push_back("\t<Relop> -> =>");
 	}
 	else if (token == "=<")
 	{
 		lexer(v, token);
-		v.push_back("<Relop> -> =<");
+		v.push_back("\t<Relop> -> =<");
 	}
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, '==', '^=', '>', '<', '=>', '=<' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, '==', '^=', '>', '<', '=>', '=<' expected");
 		return false;
 	}
 	return true;
@@ -849,7 +849,7 @@ bool Expression1()
 	if (Term1())
 	{
 		if (Expression2())
-			v.push_back("<Expression1> -> <Term2> <Expression2>");
+			v.push_back("\t<Expression1> -> <Term2> <Expression2>");
 		else
 			return false;
 	}
@@ -867,7 +867,7 @@ bool Expression2()
 		if (Term1())
 		{
 			if (Expression2())
-				v.push_back("<Expression2> -> + <Term2> <Expression2>");
+				v.push_back("\t<Expression2> -> + <Term2> <Expression2>");
 			else
 				return false;
 		}
@@ -881,7 +881,7 @@ bool Expression2()
 		if (Term1())
 		{
 			if (Expression2())
-				v.push_back("<Expression2> -> - <Term2> <Expression2>");
+				v.push_back("\t<Expression2> -> - <Term2> <Expression2>");
 			else
 				return false;
 		}
@@ -889,7 +889,7 @@ bool Expression2()
 			return false;
 	}
 	else if (Empty())
-		v.push_back("<Expression2> -> <Empty>");
+		v.push_back("\t<Expression2> -> <Empty>");
 	else
 		return false;
 	return true;
@@ -900,7 +900,7 @@ bool Term1()
 	if (Factor())
 	{
 		if (Term2())
-			v.push_back("<Term2> -> <Factor> <Term2>");
+			v.push_back("\t<Term2> -> <Factor> <Term2>");
 		else
 			return false;
 	}
@@ -918,7 +918,7 @@ bool Term2()
 		if (Factor())
 		{
 			if (Term2())
-				v.push_back("<Term2> -> * <Factor> <Term2>");
+				v.push_back("\t<Term2> -> * <Factor> <Term2>");
 			else
 				return false;
 		}
@@ -932,7 +932,7 @@ bool Term2()
 		if (Factor())
 		{
 			if (Term2())
-				v.push_back("<Term> -> / <Factor> <Term>");
+				v.push_back("\t<Term> -> / <Factor> <Term>");
 			else
 				return false;
 		}
@@ -940,7 +940,7 @@ bool Term2()
 			return false;
 	}
 	else if (Empty())
-		v.push_back("<Term2> -> <Empty>");
+		v.push_back("\t<Term2> -> <Empty>");
 	else
 		return false;
 	return true;
@@ -953,12 +953,12 @@ bool Factor()
 		token = getToken();
 		lexer(v, token);
 		if (Primary())
-			v.push_back("<Factor> -> -<Primary>");
+			v.push_back("\t<Factor> -> -<Primary>");
 		else
 			return false;
 	}
 	else if (Primary())
-		v.push_back("<Factor> -> <Primary>");
+		v.push_back("\t<Factor> -> <Primary>");
 	else
 		return false;
 	return true;
@@ -970,12 +970,12 @@ bool Primary()
 	if (token == "true")
 	{
 		lexer(v, token);
-		v.push_back("<Primary> -> true");
+		v.push_back("\t<Primary> -> true");
 	}
 	else if (token == "false")
 	{
 		lexer(v, token);
-		v.push_back("<Primary> -> false");
+		v.push_back("\t<Primary> -> false");
 	}
 	else if (isIdentifier(token))
 	{
@@ -990,12 +990,12 @@ bool Primary()
 				if (token == ")")
 				{
 					lexer(v, token);
-					v.push_back("<Primary> -> <Identifier> ( <IDs> )");
+					v.push_back("\t<Primary> -> <Identifier> ( <IDs> )");
 				}
 				else
 				{
 					lexer(v, token);
-					v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
+					v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
 					return false;
 				}
 			}
@@ -1003,12 +1003,12 @@ bool Primary()
 				return false;
 		}
 		else
-			v.push_back("<Primary> -> <Identifier>");
+			v.push_back("\t<Primary> -> <Identifier>");
 	}
 	else if (isInteger(token))
 	{
 		lexer(v, token);
-		v.push_back("<Primary> -> <Integer>");
+		v.push_back("\t<Primary> -> <Integer>");
 	}
 	else if (token == "(")
 	{
@@ -1019,12 +1019,12 @@ bool Primary()
 			if (token == ")")
 			{
 				lexer(v, token);
-				v.push_back("<Primary> -> ( <Expression> )");
+				v.push_back("\t<Primary> -> ( <Expression> )");
 			}
 			else
 			{
 				lexer(v, token);
-				v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
+				v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, ')' expected");
 				return false;
 			}
 		}
@@ -1034,13 +1034,13 @@ bool Primary()
 	else if (isReal(token))
 	{
 		lexer(v, token);
-		v.push_back("<Primary> -> <Real>");
+		v.push_back("\t<Primary> -> <Real>");
 	}
 
 	else
 	{
 		lexer(v, token);
-		v.push_back("line " + to_string(l[i]) + "; ' " + token + " ' error, 'Identifier', 'Integer', 'Identifier ( <IDs> )', '( <Expression> )', 'Real', 'true', 'false' expected");
+		v.push_back("\tline " + to_string(l[i]) + "; ' " + token + " ' error, 'Identifier', 'Integer', 'Identifier ( <IDs> )', '( <Expression> )', 'Real', 'true', 'false' expected");
 		return false;
 	}
 	return true;
@@ -1048,6 +1048,6 @@ bool Primary()
 
 bool Empty()
 {
-	v.push_back("<Empty> ->");
+	v.push_back("\t<Empty> ->");
 	return true;
 }

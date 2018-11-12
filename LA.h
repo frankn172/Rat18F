@@ -145,29 +145,29 @@ void lexer(vector<string> &r, string input)
 	if (isdigit(input[0]))
 	{
 		if (isInteger(input))
-			r.push_back("Token: integer\t\tLexer:" + input);
+			r.push_back("\nToken: integer\t\tLexer: " + input);
 		else if (isReal(input))
-			r.push_back("Token: real\t\tLexer:" + input);
+			r.push_back("\nToken: real\t\tLexer: " + input);
 		else
-			r.push_back("Token: illegal\t\tLexer:" + input);
+			r.push_back("\nToken: illegal\t\tLexer: " + input);
 	}
 	else if (isalpha(input[0]))
 	{
 		if (isKeyword(input))
-			r.push_back("Token: keyword\t\tLexer:" + input);
+			r.push_back("\nToken: keyword\t\tLexer: " + input);
 		else if (isIdentifier(input))
-			r.push_back("Token: identifier\tLexer:" + input);
+			r.push_back("\nToken: identifier\tLexer: " + input);
 		else
-			r.push_back("Token: illegal\t\tLexer:" + input);
+			r.push_back("\nToken: illegal\t\tLexer: " + input);
 	}
 	else
 	{
 		if (isSeparator(input))
-			r.push_back("Token: separator\tLexer:" + input);
+			r.push_back("\nToken: separator\tLexer: " + input);
 		else if (isOperator(input))
-			r.push_back("Token: operator\tLexer:" + input);
+			r.push_back("\nToken: operator\t\tLexer: " + input);
 		else
-			r.push_back("Token: illegal\t\tLexer:" + input);
+			r.push_back("\nToken: illegal\t\tLexer: " + input);
 	}
 }
 
