@@ -59,7 +59,8 @@ bool isInteger(string input)
 	return false;
 }
 
-bool isReal(string input) {
+bool isReal(string input)
+{
 	int table[4][2] = { 1,0,1,2,3,0,3,0 };
 	int state = 0;
 	int col;
@@ -97,6 +98,7 @@ bool isIdentifier(string input)
 		return true;
 	return false;
 }
+
 //delete comments inclosed in "[*" and "*]" from a string vector
 void deleteComment(vector<string> &str)
 {
@@ -122,6 +124,7 @@ void deleteComment(vector<string> &str)
 		else break;
 	}
 }
+
 //check if it is two connected OP/SEP
 bool isTwo(string input)
 {
@@ -167,8 +170,9 @@ void lexer(vector<string> &r, string input)
 			r.push_back("Token: illegal\t\tLexer:" + input);
 	}
 }
-//seperate connected tokens
-void sep(vector<string> &t, string input) {
+
+void separateConnectedTokens(vector<string> &t, string input)
+{
 	//point to last symbol
 	int last = 0;
 	string tem = "";
@@ -314,7 +318,7 @@ void sep(vector<string> &t, string input) {
 			t.push_back(after);
 	}
 }
-//separate string
+
 void stringsSeparator(vector<string> v, vector<string> &t)
 {
 	for (int a = 0; a < v.size(); a++)
@@ -328,7 +332,8 @@ void stringsSeparator(vector<string> v, vector<string> &t)
 				t.push_back(input);
 			else if (isReal(input))
 				t.push_back(input);
-			else sep(t, input);
+			else
+				separateConnectedTokens(t, input);
 		}
 		else if (isalpha(*fir))
 		{
@@ -336,7 +341,8 @@ void stringsSeparator(vector<string> v, vector<string> &t)
 				t.push_back(input);
 			else if (isIdentifier(input))
 				t.push_back(input);
-			else sep(t, input);
+			else
+				separateConnectedTokens(t, input);
 		}
 		else
 		{
@@ -344,11 +350,12 @@ void stringsSeparator(vector<string> v, vector<string> &t)
 				t.push_back(input);
 			else if (isOperator(input))
 				t.push_back(input);
-			else sep(t, input);
+			else
+				separateConnectedTokens(t, input);
 		}
 	}
 }
-//deletespace
+
 void deleteSpace(vector<string> &t)
 {
 	int i = 0;

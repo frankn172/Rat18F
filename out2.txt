@@ -13,7 +13,7 @@ Token: identifier	Lexer:sum
 <IDs> -> <Identifier>, <IDs>
 <Declaration> -> <Qualifier > <IDs>
 Token: separator	Lexer:;
-<Declaration List>  -> <Declaration> ;
+<Declaration List> -> <Declaration>;
 <Opt Declaration List> -> <Declaration List>
 Token: identifier	Lexer:sum
 Token: operator	Lexer:=
@@ -25,7 +25,7 @@ Token: integer		Lexer:0
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>
@@ -39,7 +39,7 @@ Token: integer		Lexer:1
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>
@@ -61,7 +61,7 @@ Token: identifier	Lexer:i
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: operator	Lexer:<
 <Relop> -> <
 Token: identifier	Lexer:max
@@ -72,8 +72,8 @@ Token: identifier	Lexer:max
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
-<Condition> -> <Expression1>  <Relop>   <Expression1>
+<Expression1> -> <Term2> <Expression2>
+<Condition> -> <Expression1> <Relop> <Expression1>
 Token: separator	Lexer:)
 Token: separator	Lexer:{
 Token: identifier	Lexer:sum
@@ -93,8 +93,8 @@ Token: identifier	Lexer:i
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression2>  ->   + <Term2> <Expression2>
-<Expression1>  -> <Term2> <Expression2>
+<Expression2> -> + <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>
@@ -115,8 +115,8 @@ Token: integer		Lexer:1
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression2>  ->   + <Term2> <Expression2>
-<Expression1>  -> <Term2> <Expression2>
+<Expression2> -> + <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>

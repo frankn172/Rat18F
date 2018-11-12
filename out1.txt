@@ -1,5 +1,3 @@
-Output:
-token		lexeme
 Token: keyword		Lexer:function
 Token: identifier	Lexer:convert1x
 Token: separator	Lexer:(
@@ -37,7 +35,7 @@ Token: integer		Lexer:32
 <Empty> ->
 <Expression2> -> <Empty>
 <Expression2> -> - <Term2> <Expression2>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:)
 <Primary> -> ( <Expression> )
 <Factor> -> <Primary>
@@ -47,21 +45,21 @@ Token: integer		Lexer:9
 <Factor> -> <Primary>
 <Empty> ->
 <Term2> -> <Empty>
-<Term> -> /  <Factor> <Term>
+<Term> -> / <Factor> <Term>
 <Term2> -> * <Factor> <Term2>
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Return> -> return; | return <Expression1>;
 <Statement> -> <Return>
 <Statement List> -> <Statement>
 Token: separator	Lexer:}
 <Body> -> { < Statement List> }
-<Function> -> function  <Identifier>   ( <Opt Parameter List> )  <Opt Declaration List>  <Body>
+<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>
 <Empty> ->
-<Function Definitions> -> <Function> 
+<Function Definitions> -> <Function>
 <Opt Function Definitions> -> <Function Definitions>
 Token: separator	Lexer:$$
 Token: keyword		Lexer:int
@@ -76,7 +74,7 @@ Token: identifier	Lexer:step
 <IDs> -> <Identifier>, <IDs>
 <Declaration> -> <Qualifier > <IDs>
 Token: separator	Lexer:;
-<Declaration List>  -> <Declaration> ;
+<Declaration List> -> <Declaration>;
 <Opt Declaration List> -> <Declaration List>
 Token: keyword		Lexer:get
 Token: separator	Lexer:(
@@ -102,7 +100,7 @@ Token: identifier	Lexer:low
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: operator	Lexer:<
 <Relop> -> <
 Token: identifier	Lexer:high
@@ -113,8 +111,8 @@ Token: identifier	Lexer:high
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
-<Condition> -> <Expression1>  <Relop>   <Expression1>
+<Expression1> -> <Term2> <Expression2>
+<Condition> -> <Expression1> <Relop> <Expression1>
 Token: separator	Lexer:)
 Token: separator	Lexer:{
 Token: keyword		Lexer:put
@@ -127,10 +125,10 @@ Token: identifier	Lexer:low
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:)
 Token: separator	Lexer:;
-<Print> -> put ( <Expression1>);
+<Print> -> put ( <Expression1> );
 <Statement> -> <Print>
 Token: keyword		Lexer:put
 Token: separator	Lexer:(
@@ -139,17 +137,17 @@ Token: separator	Lexer:(
 Token: identifier	Lexer:low
 <IDs> -> <Identifier>
 Token: separator	Lexer:)
-<Primary> -> <Identifier>  (<IDs>)
+<Primary> -> <Identifier> ( <IDs> )
 <Factor> -> <Primary>
 <Empty> ->
 <Term2> -> <Empty>
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1>  -> <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:)
 Token: separator	Lexer:;
-<Print> -> put ( <Expression1>);
+<Print> -> put ( <Expression1> );
 <Statement> -> <Print>
 Token: identifier	Lexer:low
 Token: operator	Lexer:=
@@ -168,8 +166,8 @@ Token: identifier	Lexer:step
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression2>  ->   + <Term2> <Expression2>
-<Expression1>  -> <Term2> <Expression2>
+<Expression2> -> + <Term2> <Expression2>
+<Expression1> -> <Term2> <Expression2>
 Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>
@@ -180,9 +178,9 @@ Token: separator	Lexer:}
 <Compound> -> { < Statement List> }
 <Statement> -> <Compound>
 Token: keyword		Lexer:whileend
-<While> ->  while ( <Condition>  )  <Statement>  whileend
+<While> -> while ( <Condition>  ) <Statement> whileend
 <Statement> -> <While>
 <Statement List> -> <Statement>
 <Statement List> -> <Statement> <Statement List>
 Token: separator	Lexer:$$
-<Rat18F> -> <Opt Function Definitions>   $$  <Opt Declaration List>  <Statement List>  $$
+<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List> <Statement List> $$
