@@ -13,7 +13,7 @@ int main()
 	vector<string> output;
 	vector<int> line;
 	string temp, input_file, output_file;
-	int i = 0, j = 0, counter = 0, start_point, end_point;
+	int i = 0, j = 0, counter = 1, start_point, end_point;
 	fstream f, g, h;
 	string lines;
 	bool swit;
