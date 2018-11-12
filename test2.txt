@@ -1,20 +1,17 @@
-[* this is comment for this sample code which
-   converts  Fahrenheit into Celcius *]
+ [* this is comment for this sample code 
 
-function convert1x (fahr : int)
-{
-           return 5 * (fahr - 32) / 9;
-}
+         for assignment 3 *]
 
-$$
-     int    low,  high, step;      [* declarations *]
+    $$ 
 
-     get (low, high, step);
-     while (low  <  high )  
-         {  put (low);
-             put (convert1x  (low));
-             low =  low  +  step;
-         } 
-      whileend
+    int      i, max, sum;   [* declarations *]
 
-$$
+    sum = 0;
+    i = 1;
+    get (max);
+    while (i <  max)  {
+          sum = sum + i;
+          i  = i + 1; 
+     }
+     put (sum + max);
+     $$

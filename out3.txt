@@ -1,6 +1,4 @@
-Output:
-token		lexeme
 <Empty> ->
 <Opt Function Definitions> -> <Empty>
-identifier	for
-'$$' expected
+Token: identifier	Lexer:for
+line 1; ' for ' error, '$$' expected

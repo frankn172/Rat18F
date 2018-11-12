@@ -1,4 +1,39 @@
-test 1
-[* don't try this at home *]
-9 * 5 = 45
-45 / 2 = 22.5
+[* this is comment for this sample code which
+
+   converts  Fahrenheit into Celcius *]
+
+
+
+function convert1x (fahr : int)
+
+{
+
+           return 5 * (fahr -32) / 9;
+
+}
+
+
+
+$$
+
+     int    low,  high, step;      [* declarations *]
+
+
+
+     get (low, high, step);
+
+     while (low  <  high )  
+
+         {  put (low);
+
+             put (convert1x  (low));
+
+             low =  low  +  step;
+
+         } 
+
+      whileend
+
+
+
+ $$

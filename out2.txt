@@ -1,100 +1,59 @@
-Output:
-token		lexeme
-keyword		function
-identifier	convert1x
-separator	(
-identifier	fahr
-<IDs> -> <Identifier>
-separator	:
-keyword		int
+<Empty> ->
+<Opt Function Definitions> -> <Empty>
+Token: separator	Lexer:$$
+Token: keyword		Lexer:int
 <Qualifier> -> int
-<Parameter> -> <IDs > : <Qualifier>
-<Parameter List> -> <Parameter>
-<Opt Parameter List> -> <Parameter List>
-separator	)
-<Empty> ->
-<Opt Declaration List> -> <Empty>
-separator	{
-keyword		return
-integer		5
-<Primary> -> <Integer>
-<Factor> -> <Primary>
-operator	*
-separator	(
-identifier	fahr
-<Primary> -> <Identifier>
-<Factor> -> <Primary>
-<Empty> ->
-<Term2> -> <Empty>
-<Term2> -> <Factor> <Term2>
-operator	-
-integer		32
-<Primary> -> <Integer>
-<Factor> -> <Primary>
-<Empty> ->
-<Term2> -> <Empty>
-<Term2> -> <Factor> <Term2>
-<Empty> ->
-<Expression2> -> <Empty>
-<Expression2> -> - <Term2> <Expression2>
-<Expression1> -> <Term2> <Expression2>
-separator	)
-<Primary> -> ( <Expression> )
-<Factor> -> <Primary>
-operator	/
-integer		9
-<Primary> -> <Integer>
-<Factor> -> <Primary>
-<Empty> ->
-<Term2> -> <Empty>
-<Term> -> / <Factor> <Term>
-<Term2> -> * <Factor> <Term2>
-<Term2> -> <Factor> <Term2>
-<Empty> ->
-<Expression2> -> <Empty>
-<Expression1> -> <Term2> <Expression2>
-separator	;
-<Return> -> return; | return <Expression1>;
-<Statement> -> <Return>
-<Statement List> -> <Statement>
-separator	}
-<Body> -> { < Statement List> }
-<Function> -> function <Identifier> ( <Opt Parameter List> ) <Opt Declaration List> <Body>
-<Empty> ->
-<Function Definitions> -> <Function>
-<Opt Function Definitions> -> <Function Definitions>
-separator	$$
-keyword		int
-<Qualifier> -> int
-identifier	low
-separator	,
-identifier	high
-separator	,
-identifier	step
+Token: identifier	Lexer:i
+Token: separator	Lexer:,
+Token: identifier	Lexer:max
+Token: separator	Lexer:,
+Token: identifier	Lexer:sum
 <IDs> -> <Identifier>
-<IDs> -> <Identifier> , <IDs>
-<IDs> -> <Identifier> , <IDs>
-<Declaration> -> <Qualifier> <IDs>
-separator	;
-<Declaration List> -> <Declaration> ;
+<IDs> -> <Identifier>, <IDs>
+<IDs> -> <Identifier>, <IDs>
+<Declaration> -> <Qualifier > <IDs>
+Token: separator	Lexer:;
+<Declaration List>  -> <Declaration> ;
 <Opt Declaration List> -> <Declaration List>
-keyword		get
-separator	(
-identifier	low
-separator	,
-identifier	high
-separator	,
-identifier	step
+Token: identifier	Lexer:sum
+Token: operator	Lexer:=
+Token: integer		Lexer:0
+<Primary> -> <Integer>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1>  -> <Term2> <Expression2>
+Token: separator	Lexer:;
+<Assign> -> <Identifier> = <Expression1>;
+<Statement> -> <Assign>
+Token: identifier	Lexer:i
+Token: operator	Lexer:=
+Token: integer		Lexer:1
+<Primary> -> <Integer>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+<Empty> ->
+<Expression2> -> <Empty>
+<Expression1>  -> <Term2> <Expression2>
+Token: separator	Lexer:;
+<Assign> -> <Identifier> = <Expression1>;
+<Statement> -> <Assign>
+Token: keyword		Lexer:get
+Token: separator	Lexer:(
+Token: identifier	Lexer:max
 <IDs> -> <Identifier>
-<IDs> -> <Identifier> , <IDs>
-<IDs> -> <Identifier> , <IDs>
-separator	)
-separator	;
+Token: separator	Lexer:)
+Token: separator	Lexer:;
 <Scan> -> get ( <IDs> );
 <Statement> -> <Scan>
-keyword		while
-separator	(
-identifier	low
+Token: keyword		Lexer:while
+Token: separator	Lexer:(
+Token: identifier	Lexer:i
 <Primary> -> <Identifier>
 <Factor> -> <Primary>
 <Empty> ->
@@ -102,10 +61,10 @@ identifier	low
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1> -> <Term2> <Expression2>
-operator	<
+<Expression1>  -> <Term2> <Expression2>
+Token: operator	Lexer:<
 <Relop> -> <
-identifier	high
+Token: identifier	Lexer:max
 <Primary> -> <Identifier>
 <Factor> -> <Primary>
 <Empty> ->
@@ -113,13 +72,20 @@ identifier	high
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1> -> <Term2> <Expression2>
-<Condition> -> <Expression1> <Relop> <Expression1>
-separator	)
-separator	{
-keyword		put
-separator	(
-identifier	low
+<Expression1>  -> <Term2> <Expression2>
+<Condition> -> <Expression1>  <Relop>   <Expression1>
+Token: separator	Lexer:)
+Token: separator	Lexer:{
+Token: identifier	Lexer:sum
+Token: operator	Lexer:=
+Token: identifier	Lexer:sum
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+Token: operator	Lexer:+
+Token: identifier	Lexer:i
 <Primary> -> <Identifier>
 <Factor> -> <Primary>
 <Empty> ->
@@ -127,62 +93,36 @@ identifier	low
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1> -> <Term2> <Expression2>
-separator	)
-separator	;
-<Print> -> put ( <Expression1> );
-<Statement> -> <Print>
-keyword		put
-separator	(
-identifier	convert1x
-separator	(
-identifier	low
-<IDs> -> <Identifier>
-separator	)
-<Primary> -> <Identifier> (<IDs>)
+<Expression2>  ->   + <Term2> <Expression2>
+<Expression1>  -> <Term2> <Expression2>
+Token: separator	Lexer:;
+<Assign> -> <Identifier> = <Expression1>;
+<Statement> -> <Assign>
+Token: identifier	Lexer:i
+Token: operator	Lexer:=
+Token: identifier	Lexer:i
+<Primary> -> <Identifier>
+<Factor> -> <Primary>
+<Empty> ->
+<Term2> -> <Empty>
+<Term2> -> <Factor> <Term2>
+Token: operator	Lexer:+
+Token: integer		Lexer:1
+<Primary> -> <Integer>
 <Factor> -> <Primary>
 <Empty> ->
 <Term2> -> <Empty>
 <Term2> -> <Factor> <Term2>
 <Empty> ->
 <Expression2> -> <Empty>
-<Expression1> -> <Term2> <Expression2>
-separator	)
-separator	;
-<Print> -> put ( <Expression1> );
-<Statement> -> <Print>
-identifier	low
-operator	=
-identifier	low
-<Primary> -> <Identifier>
-<Factor> -> <Primary>
-<Empty> ->
-<Term2> -> <Empty>
-<Term2> -> <Factor> <Term2>
-operator	+
-identifier	step
-<Primary> -> <Identifier>
-<Factor> -> <Primary>
-<Empty> ->
-<Term2> -> <Empty>
-<Term2> -> <Factor> <Term2>
-<Empty> ->
-<Expression2> -> <Empty>
-<Expression2> -> + <Term2> <Expression2>
-<Expression1> -> <Term2> <Expression2>
-separator	;
+<Expression2>  ->   + <Term2> <Expression2>
+<Expression1>  -> <Term2> <Expression2>
+Token: separator	Lexer:;
 <Assign> -> <Identifier> = <Expression1>;
 <Statement> -> <Assign>
 <Statement List> -> <Statement>
 <Statement List> -> <Statement> <Statement List>
-<Statement List> -> <Statement> <Statement List>
-separator	}
+Token: separator	Lexer:}
 <Compound> -> { < Statement List> }
 <Statement> -> <Compound>
-keyword		whileend
-<While> -> while ( <Condition> ) <Statement> whileend
-<Statement> -> <While>
-<Statement List> -> <Statement>
-<Statement List> -> <Statement> <Statement List>
-separator	$$
-<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List>  <Statement List> $$
+line 16; ' put ' error, 'whileend' expected

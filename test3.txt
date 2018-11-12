@@ -1,5 +1,4 @@
-
-	for (int i = 0; i < size; ++i)
+	for (int i = 0; i < output.size(); ++i)
 	{
-		g << lexer(str) << endl;
+		g << output.at(i) << endl;
 	}
