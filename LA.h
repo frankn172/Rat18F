@@ -97,7 +97,6 @@ bool isIdentifier(string input)
 		return true;
 	return false;
 }
-
 //delete comments inclosed in "[*" and "*]" from a string vector
 void deleteComment(vector<string> &str)
 {
@@ -123,7 +122,6 @@ void deleteComment(vector<string> &str)
 		else break;
 	}
 }
-
 //check if it is two connected OP/SEP
 bool isTwo(string input)
 {
@@ -137,39 +135,39 @@ bool isTwo(string input)
 	return false;
 }
 
-
+//lexcial analysis
 void lexer(vector<string> &r, string input)
 {
 	//go to special case if not match common case
 	if (isdigit(input[0]))
 	{
 		if (isInteger(input))
-			r.push_back("integer\t\t" + input);
+			r.push_back("Token: integer\t\tLexer:" + input);
 		else if (isReal(input))
-			r.push_back("real\t\t" + input);
+			r.push_back("Token: real\t\tLexer:" + input);
 		else
-			r.push_back("illegal\t\t" + input);
+			r.push_back("Token: illegal\t\tLexer:" + input);
 	}
 	else if (isalpha(input[0]))
 	{
 		if (isKeyword(input))
-			r.push_back("keyword\t\t" + input);
+			r.push_back("Token: keyword\t\tLexer:" + input);
 		else if (isIdentifier(input))
-			r.push_back("identifier\t" + input);
+			r.push_back("Token: identifier\tLexer:" + input);
 		else
-			r.push_back("illegal\t\t" + input);
+			r.push_back("Token: illegal\t\tLexer:" + input);
 	}
 	else
 	{
 		if (isSeparator(input))
-			r.push_back("separator\t" + input);
+			r.push_back("Token: separator\tLexer:" + input);
 		else if (isOperator(input))
-			r.push_back("operator\t" + input);
+			r.push_back("Token: operator\tLexer:" + input);
 		else
-			r.push_back("illegal\t\t" + input);
+			r.push_back("Token: illegal\t\tLexer:" + input);
 	}
 }
-
+//seperate connected tokens
 void sep(vector<string> &t, string input) {
 	//point to last symbol
 	int last = 0;
@@ -316,9 +314,8 @@ void sep(vector<string> &t, string input) {
 			t.push_back(after);
 	}
 }
-
 //separate string
-void stringsSeparator(vector<string> v, vector<string> &t, vector<int> c)
+void stringsSeparator(vector<string> v, vector<string> &t)
 {
 	for (int a = 0; a < v.size(); a++)
 	{
@@ -351,7 +348,7 @@ void stringsSeparator(vector<string> v, vector<string> &t, vector<int> c)
 		}
 	}
 }
-
+//deletespace
 void deleteSpace(vector<string> &t)
 {
 	int i = 0;
