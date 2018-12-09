@@ -58,8 +58,7 @@ int get_address(string token) {
 }
 
 int address() {
-	int back = I.size() - 1;
-	return I[back].Iadd;
+	return Icounter;
 }
 
 void push_jumpstack(int add) {
