@@ -71,7 +71,7 @@ void get_instr(string op, int oprnd) {
 }
 
 void back_patch(int jump_addr) {
-	int addr = JS.top();
+	int addr = JS.top()-1;
 	JS.pop();
 	I[addr].ope = jump_addr;
 }

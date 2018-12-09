@@ -73,9 +73,11 @@ int main()
 	{
 		g << output.at(i) << endl;
 	}
+	g << "Address\t\tOperation\tOperand" << endl;
 	for (int i = 0; i < I.size(); i++) {
 		g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << I[i].ope << endl;
 	}
+	g << "Identifier\tMemoryLocation\tType" << endl;
 	for (int i = 0; i < S.size(); i++) {
 		g << S[i].name << "\t\t" << S[i].Madd << "\t\t" << S[i].type << endl;
 	}
