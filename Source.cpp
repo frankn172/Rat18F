@@ -68,11 +68,6 @@ int main()
 	passVector1(token, line);
 	Rat18F();
 	passVector2(output);
-	//write output
-	for (int i = 0; i < output.size(); ++i)
-	{
-		g << output.at(i) << endl;
-	}
 	g << "Address\t\tOperation\tOperand" << endl;
 	for (int i = 0; i < I.size(); i++) {
 		g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << I[i].ope << endl;
