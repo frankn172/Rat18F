@@ -70,7 +70,11 @@ int main()
 	passVector2(output);
 	g << "Address\t\tOperation\tOperand" << endl;
 	for (int i = 0; i < I.size(); i++) {
-		g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << I[i].ope << endl;
+		if (I[i].ope == NULL) {
+			g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << endl;
+		}
+		else
+			g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << I[i].ope << endl;
 	}
 	g << "Identifier\tMemoryLocation\tType" << endl;
 	for (int i = 0; i < S.size(); i++) {
