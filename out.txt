@@ -1,237 +1,30 @@
-	<Empty> ->
-	<Opt Function Definitions> -> <Empty>
-
-Token: separator	Lexer: $$
-
-Token: keyword		Lexer: int
-	<Qualifier> -> int
-
-Token: identifier	Lexer: i
-
-Token: separator	Lexer: ,
-
-Token: identifier	Lexer: max
-
-Token: separator	Lexer: ,
-
-Token: identifier	Lexer: sum
-	<IDs> -> <Identifier>
-	<IDs> -> <Identifier>, <IDs>
-	<IDs> -> <Identifier>, <IDs>
-	<Declaration> -> <Qualifier > <IDs>
-
-Token: separator	Lexer: ;
-	<Declaration List> -> <Declaration>;
-	<Opt Declaration List> -> <Declaration List>
-
-Token: identifier	Lexer: sum
-
-Token: operator		Lexer: =
-
-Token: integer		Lexer: 0
-	<Primary> -> <Integer>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: separator	Lexer: ;
-	<Assign> -> <Identifier> = <Expression1>;
-	<Statement> -> <Assign>
-
-Token: identifier	Lexer: i
-
-Token: operator		Lexer: =
-
-Token: integer		Lexer: 1
-	<Primary> -> <Integer>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: separator	Lexer: ;
-	<Assign> -> <Identifier> = <Expression1>;
-	<Statement> -> <Assign>
-
-Token: keyword		Lexer: get
-
-Token: separator	Lexer: (
-
-Token: identifier	Lexer: max
-	<IDs> -> <Identifier>
-
-Token: separator	Lexer: )
-
-Token: separator	Lexer: ;
-	<Scan> -> get ( <IDs> );
-	<Statement> -> <Scan>
-
-Token: keyword		Lexer: while
-
-Token: separator	Lexer: (
-
-Token: identifier	Lexer: i
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: operator		Lexer: <
-	<Relop> -> <
-
-Token: identifier	Lexer: max
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression1> -> <Term2> <Expression2>
-	<Condition> -> <Expression1> <Relop> <Expression1>
-
-Token: separator	Lexer: )
-
-Token: separator	Lexer: {
-
-Token: identifier	Lexer: sum
-
-Token: operator		Lexer: =
-
-Token: identifier	Lexer: sum
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-
-Token: operator		Lexer: +
-
-Token: identifier	Lexer: i
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression2> -> + <Term2> <Expression2>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: separator	Lexer: ;
-	<Assign> -> <Identifier> = <Expression1>;
-	<Statement> -> <Assign>
-
-Token: identifier	Lexer: i
-
-Token: operator		Lexer: =
-
-Token: identifier	Lexer: i
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-
-Token: operator		Lexer: +
-
-Token: integer		Lexer: 1
-	<Primary> -> <Integer>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression2> -> + <Term2> <Expression2>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: separator	Lexer: ;
-	<Assign> -> <Identifier> = <Expression1>;
-	<Statement> -> <Assign>
-	<Statement List> -> <Statement>
-	<Statement List> -> <Statement> <Statement List>
-
-Token: separator	Lexer: }
-	<Compound> -> { < Statement List> }
-	<Statement> -> <Compound>
-
-Token: keyword		Lexer: whileend
-	<While> -> while ( <Condition>  ) <Statement> whileend
-	<Statement> -> <While>
-
-Token: keyword		Lexer: put
-
-Token: separator	Lexer: (
-
-Token: identifier	Lexer: sum
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-
-Token: operator		Lexer: +
-
-Token: identifier	Lexer: max
-	<Primary> -> <Identifier>
-	<Factor> -> <Primary>
-	<Empty> ->
-	<Term2> -> <Empty>
-	<Term2> -> <Factor> <Term2>
-	<Empty> ->
-	<Expression2> -> <Empty>
-	<Expression2> -> + <Term2> <Expression2>
-	<Expression1> -> <Term2> <Expression2>
-
-Token: separator	Lexer: )
-
-Token: separator	Lexer: ;
-	<Print> -> put ( <Expression1> );
-	<Statement> -> <Print>
-	<Statement List> -> <Statement>
-	<Statement List> -> <Statement> <Statement List>
-	<Statement List> -> <Statement> <Statement List>
-	<Statement List> -> <Statement> <Statement List>
-	<Statement List> -> <Statement> <Statement List>
-
-Token: separator	Lexer: $$
-	<Rat18F> -> <Opt Function Definitions> $$ <Opt Declaration List> <Statement List> $$
+Address		Operation	Operand
 1		PUSHI		0
 2		POPM		5002
 3		PUSHI		1
 4		POPM		5000
-5		STDIN		0
+5		STDIN		
 6		POPM		5001
-7		LABEL		0
+7		LABEL		
 8		PUSHM		5000
 9		PUSHM		5001
-10		LES		0
-11		JUMPZ		20
+10		LES		
+11		JUMPZ		21
 12		PUSHM		5002
 13		PUSHM		5000
-14		ADD		0
+14		ADD		
 15		POPM		5002
 16		PUSHM		5000
 17		PUSHI		1
-18		ADD		0
+18		ADD		
 19		POPM		5000
-20		JUMP		6
+20		JUMP		7
 21		PUSHM		5002
 22		PUSHM		5001
-23		ADD		0
-24		STDOUT		0
+23		ADD		
+24		STDOUT		
+
+Identifier	MemoryLocation	Type
 i		5000		int
 max		5001		int
 sum		5002		int

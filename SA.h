@@ -43,12 +43,13 @@ bool Factor();//27
 bool Primary();//28
 bool Empty();//29
 
-			 //receive vectors from main
+//receive vectors from main
 void passVector1(vector<string> &to, vector<int> &tl)
 {
 	t = to;
 	l = tl;
 }
+
 //pass vectors to main
 void passVector2(vector<string> &ou)
 {

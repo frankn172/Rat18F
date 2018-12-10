@@ -1,18 +1,26 @@
+//CPSC 323
+//Compiler Project
+//Frank Ngo & Yifei Feng
+//IN.h
+
 #pragma once
 
 #include<string>
 #include<vector>
 #include<stack>
-
 using namespace std;
+
 //sybol table struct
-struct symbol {
+struct symbol
+{
 	string name;
 	int Madd;
 	string type;
 };
+
 //instruction table struct
-struct instruction {
+struct instruction
+{
 	int Iadd;
 	string op;
 	int ope;
@@ -31,58 +39,66 @@ int Scounter = 5000;
 //instruction address counter
 int Icounter = 1;
 //add int type into sybol table
-void add_var(string token) {
+void add_var(string token)
+{
 	bool swi = true;
-	for (int i = 0; i < S.size(); i++) {
-		if (token == S[i].name&&S[i].type=="int") {
+	for (int i = 0; i < S.size(); i++)
+	{
+		if (token == S[i].name&&S[i].type == "int")
 			swi = false;
-		}
 	}
-	if (swi) {
+	if (swi)
+	{
 		S.push_back({ token,Scounter,"int" });
 		Scounter++;
 	}
 }
 //add bool type into sybol table
-void add_bool(string token) {
+void add_bool(string token)
+{
 	bool swi = true;
-	for (int i = 0; i < S.size(); i++) {
-		if (token == S[i].name&&S[i].type == "boolean") {
+	for (int i = 0; i < S.size(); i++)
+	{
+		if (token == S[i].name&&S[i].type == "boolean")
 			swi = false;
-		}
 	}
-	if (swi) {
+	if (swi)
+	{
 		S.push_back({ token,Scounter,"bollean" });
 		Scounter++;
 	}
 }
 //get address of symbol
-int get_address(string token) {
+int get_address(string token)
+{
 	int temp;
 	for (int i = 0; i < S.size(); i++)
 	{
-		if (token == S[i].name) {
+		if (token == S[i].name)
 			temp = S[i].Madd;
-		}
 	}
 	return temp;
 }
 //get address of instruction
-int address() {
+int address()
+{
 	return Icounter;
 }
 //add jump address
-void push_jumpstack(int add) {
+void push_jumpstack(int add)
+{
 	JS.push(add);
 }
 //generate instruction
-void get_instr(string op, int oprnd) {
+void get_instr(string op, int oprnd)
+{
 	I.push_back({ Icounter,op,oprnd });
 	Icounter++;
 }
 //go back to add address of jump
-void back_patch(int jump_addr) {
-	int addr = JS.top()-1;
+void back_patch(int jump_addr)
+{
+	int addr = JS.top() - 1;
 	JS.pop();
 	I[addr].ope = jump_addr;
 }

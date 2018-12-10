@@ -23,6 +23,7 @@ Address		Operation	Operand
 22		PUSHM		5001
 23		ADD		
 24		STDOUT		
+
 Identifier	MemoryLocation	Type
 i		5000		int
 max		5001		int

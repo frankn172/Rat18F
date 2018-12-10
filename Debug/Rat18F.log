@@ -1,12 +1,16 @@
-﻿  main.cpp
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(49): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(67): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(87): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(109): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(186): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(324): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(362): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\sa.h(57): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(43): warning C4018: '<': signed/unsigned mismatch
-c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\main.cpp(69): warning C4018: '<': signed/unsigned mismatch
+﻿  Source.cpp
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\in.h(45): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\in.h(60): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\in.h(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(50): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(68): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(88): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(110): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(188): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(326): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\la.h(364): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\sa.h(61): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\source.cpp(45): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\source.cpp(72): warning C4018: '<': signed/unsigned mismatch
+c:\users\livel\onedrive - cal state fullerton\2018 fall\cpsc 323\project\rat18f\rat18f\source.cpp(80): warning C4018: '<': signed/unsigned mismatch
   Rat18F.vcxproj -> C:\Users\livel\OneDrive - Cal State Fullerton\2018 Fall\CPSC 323\Project\Rat18F\Debug\Rat18F.exe

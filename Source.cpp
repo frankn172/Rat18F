@@ -1,13 +1,12 @@
 //CPSC 323
 //Compiler Project
 //Frank Ngo & Yifei Feng
-//main.cpp
+//Source.cpp
 
 #include<fstream>
 #include "IN.h"
 #include "LA.h"
 #include "SA.h"
-
 
 int main()
 {
@@ -77,7 +76,7 @@ int main()
 		else
 			g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << I[i].ope << endl;
 	}
-	g << "Identifier\tMemoryLocation\tType" << endl;
+	g << "\nIdentifier\tMemoryLocation\tType" << endl;
 	for (int i = 0; i < S.size(); i++) {
 		g << S[i].name << "\t\t" << S[i].Madd << "\t\t" << S[i].type << endl;
 	}
