@@ -1,5 +1,11 @@
-	<Empty> ->
-	<Opt Function Definitions> -> <Empty>
-
-Token: identifier	Lexer: for
-	line 1; ' for ' error, '$$' expected
+Address		Operation	Operand
+1		PUSHM		5000
+2		PUSHM		5001
+3		LES		
+4		JUMPZ		7
+5		PUSHM		5002
+6		POPM		5000
+Identifier	MemoryLocation	Type
+a		5000		int
+b		5001		int
+c		5002		int

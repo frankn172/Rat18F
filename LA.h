@@ -147,6 +147,7 @@ void lexer(vector<string> &r, string input)
 	{
 		if (isInteger(input))
 			r.push_back("\nToken: integer\t\tLexer: " + input);
+		//real is illegal
 		else if (isReal(input))
 			r.push_back("\nToken: illegal\t\tLexer: " + input);
 		else

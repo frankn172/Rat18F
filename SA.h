@@ -203,6 +203,7 @@ bool Declaration()
 
 bool IDs()
 {
+	save = token;
 	token = getToken();
 	if (isIdentifier(token))
 	{
@@ -210,7 +211,13 @@ bool IDs()
 			token = "-" + token;
 			swit = false;
 		}
-		add_var(token);
+		//bool or int
+		if (save == "boolean") {
+			add_bool(token);
+		}
+		else {
+			add_var(token);
+		}
 		lexer(v, token);
 		if (t[i] == ",")
 		{

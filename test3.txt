@@ -1,4 +1,3 @@
-	for (int i = 0; i < output.size(); ++i)
-	{
-		g << output.at(i) << endl;
-	}
+$$
+if (a < b)  a =  c;  ifend
+$$

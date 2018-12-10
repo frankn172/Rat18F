@@ -64,13 +64,14 @@ int main()
 		j--;
 		counter++;
 	}
-	//syntax analysis
+	//syntax analysis and opt
 	passVector1(token, line);
 	Rat18F();
 	passVector2(output);
+	//print the assembly code and symbol table
 	g << "Address\t\tOperation\tOperand" << endl;
 	for (int i = 0; i < I.size(); i++) {
-		if (I[i].ope == NULL) {
+		if (I[i].ope == NULL&&I[i].op!="PUSHI") {
 			g << I[i].Iadd << "\t\t" << I[i].op << "\t\t" << endl;
 		}
 		else
