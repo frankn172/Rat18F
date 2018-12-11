@@ -10,7 +10,7 @@
 #include<stack>
 using namespace std;
 
-//sybol table struct
+//symbol table struct
 struct symbol
 {
 	string name;
@@ -34,11 +34,12 @@ stack<int> JS;
 vector<symbol> S;
 //instruction table
 vector<instruction> I;
-//sybol address counter
+//symbol address counter
 int Scounter = 5000;
 //instruction address counter
 int Icounter = 1;
-//add int type into sybol table
+
+//add int type into symbol table
 void add_var(string token)
 {
 	bool swi = true;
@@ -53,7 +54,7 @@ void add_var(string token)
 		Scounter++;
 	}
 }
-//add bool type into sybol table
+//add bool type into symbol table
 void add_bool(string token)
 {
 	bool swi = true;
@@ -79,22 +80,26 @@ int get_address(string token)
 	}
 	return temp;
 }
+
 //get address of instruction
 int address()
 {
 	return Icounter;
 }
+
 //add jump address
 void push_jumpstack(int add)
 {
 	JS.push(add);
 }
+
 //generate instruction
 void get_instr(string op, int oprnd)
 {
 	I.push_back({ Icounter,op,oprnd });
 	Icounter++;
 }
+
 //go back to add address of jump
 void back_patch(int jump_addr)
 {
