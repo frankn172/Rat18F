@@ -567,7 +567,6 @@ bool If()
 		{
 			lexer(v, token);
 			//3
-			token = getToken();
 			if (Condition())
 			{
 				//4
